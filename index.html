@@ -1,0 +1,2071 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#33332f">
+  <title>Step Into a World of Colour | Resene</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7f3e9;
+      --muted: rgba(247, 243, 233, .76);
+      --line: rgba(255, 255, 255, .28);
+      --glass: rgba(39, 43, 38, .36);
+      --serif: "Italiana", Georgia, serif;
+      --sans: "DM Sans", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { width: 100%; height: 100%; margin: 0; }
+
+    body {
+      overflow: hidden;
+      background: #373833;
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { font: inherit; color: inherit; }
+
+    .screen {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      height: 100%;
+      min-height: 580px;
+      overflow: hidden;
+      background: #373833;
+    }
+
+    .collage {
+      position: absolute;
+      z-index: -3;
+      inset: -2.5%;
+      display: grid;
+      grid-template-columns: 1.08fr 1fr 1.13fr 1.02fr;
+      grid-template-rows: 1fr .91fr 1.06fr;
+      gap: 5px;
+      transform: scale(1.025);
+      animation: collage-arrive 1.8s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    .scene {
+      min-width: 0;
+      min-height: 0;
+      background-size: cover;
+      background-position: center;
+      filter: saturate(.82) brightness(.83);
+      animation: image-breathe 24s ease-in-out infinite alternate;
+    }
+
+    .scene-1 {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+      background-image: url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=88");
+      background-position: center 54%;
+    }
+
+    .scene-2 {
+      grid-column: 3;
+      grid-row: 1;
+      background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1300&q=88");
+      background-position: center 60%;
+      animation-delay: -5s;
+    }
+
+    .scene-3 {
+      grid-column: 4;
+      grid-row: 1 / 3;
+      background-image: url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1300&q=88");
+      background-position: 54% center;
+      animation-delay: -9s;
+    }
+
+    .scene-4 {
+      grid-column: 3;
+      grid-row: 2 / 4;
+      background-image: url("https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1300&q=88");
+      background-position: center;
+      animation-delay: -13s;
+    }
+
+    .scene-5 {
+      grid-column: 1 / 3;
+      grid-row: 3;
+      background-image: url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1500&q=88");
+      background-position: center 70%;
+      animation-delay: -3s;
+    }
+
+    .scene-6 {
+      grid-column: 4;
+      grid-row: 3;
+      background-image: url("https://images.unsplash.com/photo-1600210491369-e753d80a41f3?auto=format&fit=crop&w=1300&q=88");
+      background-position: center 62%;
+      animation-delay: -11s;
+    }
+
+    .veil {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(28, 31, 28, .68) 0%, rgba(32, 34, 30, .44) 34%, rgba(28, 31, 29, .10) 68%, rgba(27, 30, 28, .34) 100%),
+        linear-gradient(0deg, rgba(24, 27, 25, .75) 0%, rgba(30, 32, 29, .22) 23%, transparent 53%, rgba(25, 28, 27, .18) 100%),
+        radial-gradient(ellipse at 38% 40%, transparent 8%, rgba(24, 27, 24, .20) 100%);
+    }
+
+    .grain {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      opacity: .14;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    .topbar {
+      position: absolute;
+      top: clamp(26px, 4.1vh, 48px);
+      left: 5.2%;
+      right: 5.2%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .global-tools { display: flex; align-items: center; gap: 7px; }
+    .global-tools button { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; background: rgba(36,39,34,.24); color: var(--ink); cursor: pointer; font-size: 17px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .global-tools button:hover { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.12); }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .16em;
+    }
+
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .edition {
+      color: rgba(255,255,255,.82);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      position: absolute;
+      top: 24%;
+      left: 10.1%;
+      width: min(660px, 51vw);
+      animation: rise-in 1.15s .12s both cubic-bezier(.2,.7,.2,1);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin: 0 0 23px;
+      color: rgba(250,246,236,.88);
+      font-size: clamp(10px, .75vw, 13px);
+      font-weight: 600;
+      letter-spacing: .23em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 35px;
+      height: 1px;
+      content: "";
+      background: #d7b993;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(66px, 7.3vw, 124px);
+      font-weight: 400;
+      line-height: .87;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow: 0 3px 28px rgba(0,0,0,.2);
+    }
+
+    h1 span { display: block; }
+    h1 span:last-child { color: #ead9bd; }
+
+    .subheadline {
+      max-width: 420px;
+      margin: 27px 0 0;
+      color: rgba(255,255,255,.86);
+      font-size: clamp(14px, 1.05vw, 18px);
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .begin {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 37px;
+      padding: 14px 0;
+      border: 0;
+      border-bottom: 1px solid rgba(255,255,255,.58);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      transition: gap .25s ease, color .25s ease;
+    }
+
+    .begin:hover { gap: 22px; color: #f0d7b3; }
+
+    .begin-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .inspiration-note {
+      position: absolute;
+      right: 8.6%;
+      top: 19%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,.88);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      animation: rise-in 1.1s .45s both;
+    }
+
+    .inspiration-note::after {
+      width: 1px;
+      height: 54px;
+      content: "";
+      background: rgba(255,255,255,.68);
+    }
+
+    .discovery {
+      position: absolute;
+      top: 27%;
+      right: 10.1%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      width: clamp(440px, 34vw, 650px);
+      animation: rise-in 1.15s .3s both cubic-bezier(.2,.7,.2,1);
+    }
+
+    .discovery-card {
+      min-height: 96px;
+      display: grid;
+      grid-template-columns: 42px 1fr 16px;
+      align-items: center;
+      gap: 13px;
+      padding: 15px 16px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 3px;
+      background: linear-gradient(115deg, rgba(248,245,236,.20), rgba(227,232,224,.08));
+      box-shadow: 0 12px 32px rgba(15,18,16,.12), inset 0 1px 0 rgba(255,255,255,.13);
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      text-align: left;
+      cursor: pointer;
+      transition: transform .3s ease, border-color .3s ease, background .3s ease;
+    }
+
+    .discovery-card:hover {
+      transform: translateX(-6px);
+      border-color: rgba(255,255,255,.58);
+      background: linear-gradient(115deg, rgba(248,245,236,.28), rgba(227,232,224,.13));
+    }
+
+    .card-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.39);
+      border-radius: 50%;
+      color: #f2dfc1;
+      font-family: var(--serif);
+      font-size: 21px;
+    }
+
+    .card-title {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(18px, 1.35vw, 22px);
+      line-height: 1.1;
+    }
+
+    .card-caption {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255,255,255,.68);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .card-arrow { color: rgba(255,255,255,.8); font-size: 17px; }
+
+    .swatch-orbit {
+      position: absolute;
+      right: 31%;
+      bottom: 23%;
+      width: 152px;
+      height: 110px;
+      animation: drift 7.5s ease-in-out infinite;
+      filter: drop-shadow(0 15px 17px rgba(19,22,18,.24));
+    }
+
+    .swatch {
+      position: absolute;
+      width: 44px;
+      height: 70px;
+      border: 1px solid rgba(255,255,255,.58);
+      border-radius: 2px;
+      box-shadow: inset 0 0 10px rgba(255,255,255,.16);
+      transform-origin: 50% 100%;
+    }
+
+    .swatch:nth-child(1) { left: 20px; top: 15px; background: #707e68; transform: rotate(-24deg); }
+    .swatch:nth-child(2) { left: 44px; top: 9px; background: #c1a68b; transform: rotate(-11deg); }
+    .swatch:nth-child(3) { left: 69px; top: 7px; background: #d2c8b3; transform: rotate(3deg); }
+    .swatch:nth-child(4) { left: 94px; top: 12px; background: #a96852; transform: rotate(17deg); }
+    .swatch:nth-child(5) { left: 117px; top: 20px; background: #52544b; transform: rotate(29deg); }
+
+    .swatch::after {
+      position: absolute;
+      left: 10px;
+      bottom: 8px;
+      color: rgba(255,255,255,.68);
+      content: "R";
+      font-family: var(--serif);
+      font-size: 10px;
+    }
+
+    .paint-dots {
+      position: absolute;
+      left: 6.4%;
+      bottom: 17%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 13px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 30px;
+      background: rgba(34,37,32,.26);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      animation: drift 8s 1s ease-in-out infinite;
+    }
+
+    .paint-dots span {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+    }
+
+    .paint-dots span:nth-child(1) { background: #6e7c68; }
+    .paint-dots span:nth-child(2) { background: #b77761; }
+    .paint-dots span:nth-child(3) { background: #d5c9b3; }
+    .paint-dots span:nth-child(4) { background: #494b45; }
+    .paint-dots span:nth-child(5) { background: #e6dfd0; }
+
+    .ribbon {
+      position: absolute;
+      right: 5.2%;
+      bottom: 5.3%;
+      left: 5.2%;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 28px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 3px;
+      background: linear-gradient(100deg, rgba(28,31,27,.56), rgba(53,56,48,.38));
+      box-shadow: 0 16px 42px rgba(13,15,13,.16), inset 0 1px 0 rgba(255,255,255,.12);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      animation: rise-in 1.1s .5s both;
+    }
+
+    .ribbon-label {
+      color: rgba(255,255,255,.53);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ribbon-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      max-width: 1000px;
+      gap: 18px;
+    }
+
+    .ribbon-links button {
+      position: relative;
+      padding: 10px 0;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,.91);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .ribbon-links button::after {
+      position: absolute;
+      right: 0;
+      bottom: 2px;
+      left: 0;
+      height: 1px;
+      content: "";
+      background: #d7b993;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+
+    .ribbon-links button:hover::after { transform: scaleX(1); }
+
+    .footnote {
+      position: absolute;
+      bottom: 1.7%;
+      left: 5.3%;
+      color: rgba(255,255,255,.62);
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .calculator {
+      position: fixed;
+      inset: 0;
+      width: min(760px, calc(100vw - 32px));
+      max-width: none;
+      max-height: min(92vh, 820px);
+      margin: auto;
+      padding: clamp(24px, 4vw, 46px);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 3px;
+      background: #30362f;
+      color: var(--ink);
+      box-shadow: 0 25px 100px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    .calculator::backdrop {
+      background: rgba(15,18,16,.72);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .calculator-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .calculator-eyebrow {
+      margin: 0 0 8px;
+      color: #d7b993;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    .calculator h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .calculator-close {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 22px;
+    }
+
+    .calculator-field { display: grid; gap: 8px; }
+
+    .calculator-field label {
+      color: rgba(255,255,255,.86);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .calculator-field input,
+    .calculator-field select {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.27);
+      border-radius: 2px;
+      outline: none;
+      background: rgba(255,255,255,.08);
+      color: var(--ink);
+      font: 500 15px var(--sans);
+    }
+
+    .calculator-field select { color-scheme: dark; }
+
+    .calculator-field input:focus,
+    .calculator-field select:focus { border-color: #d7b993; }
+
+    .calculator-note {
+      margin: 17px 0 22px;
+      color: rgba(255,255,255,.66);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .calculator-result {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,.22);
+      border-bottom: 1px solid rgba(255,255,255,.22);
+    }
+
+    .calculator-result-label {
+      color: rgba(255,255,255,.77);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .calculator-result output {
+      color: #ead9bd;
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1;
+      text-align: right;
+    }
+
+    .calculator-product-name { margin: 11px 0 0; color: rgba(255,255,255,.72); font-size: 12px; line-height: 1.5; }
+    .paint-estimate-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 16px; padding: 15px 16px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.045); }
+    .paint-estimate-cta p { margin: 0; color: rgba(255,255,255,.72); font-size: 11px; line-height: 1.5; }
+    .paint-estimate-cta strong { color: var(--ink); font-weight: 500; }
+    .paint-estimate-cta button { min-height: 42px; flex: 0 0 auto; padding: 0 16px; border: 1px solid #d7b993; border-radius: 2px; background: #d7b993; color: #282d27; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+    .calculator-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .calculator-actions a {
+      color: rgba(255,255,255,.82);
+      font-size: 11px;
+      line-height: 1.5;
+      text-decoration-color: rgba(255,255,255,.45);
+      text-underline-offset: 4px;
+    }
+
+    .calculator-done {
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 2px;
+      background: #d7b993;
+      color: #282d27;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .project-assistant {
+      position: fixed;
+      inset: 0;
+      width: min(940px, calc(100vw - 32px));
+      max-width: none;
+      max-height: min(92vh, 900px);
+      margin: auto;
+      padding: clamp(24px, 4vw, 46px);
+      overflow: auto;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 3px;
+      background: #30362f;
+      color: var(--ink);
+      box-shadow: 0 25px 100px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    .project-assistant::backdrop {
+      background: rgba(15,18,16,.72);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    .project-header,
+    .wizard-actions,
+    .project-section-heading,
+    .project-resource-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .project-header { margin-bottom: 24px; }
+    .project-header h2 { margin: 0; font: 400 clamp(34px, 5vw, 52px)/1 var(--serif); }
+    .project-step-label { color: #d7b993; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+
+    .project-close {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .project-progress { height: 2px; margin: 0 0 32px; background: rgba(255,255,255,.18); }
+    .project-progress span { display: block; width: 25%; height: 100%; background: #d7b993; transition: width .25s ease; }
+    .project-question { margin: 0 0 20px; font: 400 clamp(26px, 3.5vw, 36px)/1.15 var(--serif); }
+
+    .project-options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .project-option {
+      min-height: 58px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 2px;
+      background: rgba(255,255,255,.045);
+      color: rgba(255,255,255,.88);
+      cursor: pointer;
+      text-align: left;
+      transition: background .2s ease, border-color .2s ease;
+    }
+
+    .project-option:hover,
+    .project-option[aria-pressed="true"] { border-color: #d7b993; background: rgba(215,185,147,.14); }
+
+    .wizard-actions { justify-content: flex-end; margin-top: 30px; }
+    .wizard-actions[hidden], .wizard-actions button[hidden] { display: none; }
+    .wizard-actions button {
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid rgba(255,255,255,.42);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .wizard-actions button:last-child { border-color: #d7b993; background: #d7b993; color: #282d27; }
+    .wizard-actions button:disabled { opacity: .4; cursor: default; }
+
+    .project-results { display: grid; gap: 26px; }
+    .project-summary { padding: 19px 0; border-top: 1px solid rgba(255,255,255,.2); border-bottom: 1px solid rgba(255,255,255,.2); }
+    .project-section-heading { justify-content: flex-start; margin: 0 0 13px; }
+    .project-section-heading h3 { margin: 0; font: 400 25px/1.1 var(--serif); }
+    .project-index { color: #d7b993; font-size: 9px; font-weight: 600; letter-spacing: .14em; }
+
+    .summary-grid,
+    .recommendation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px 22px; }
+
+    .summary-item span,
+    .recommendation-card h4 { display: block; margin: 0 0 5px; color: rgba(255,255,255,.57); font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+
+    .summary-item strong { font-size: 14px; font-weight: 500; }
+    .recommendation-card { padding: 15px 0 0; border-top: 1px solid rgba(255,255,255,.16); }
+    .recommendation-card h4 { margin-bottom: 8px; color: #d7b993; }
+    .recommendation-card p { margin: 5px 0; color: rgba(255,255,255,.77); font-size: 12px; line-height: 1.5; }
+    .recommendation-card strong { color: var(--ink); font-size: 15px; font-weight: 500; }
+    .recommendation-card a,
+    .project-resource-links a { color: #ead9bd; font-size: 11px; text-underline-offset: 3px; }
+
+    .project-resource-links { justify-content: flex-start; flex-wrap: wrap; gap: 10px 24px; }
+    .project-disclaimer { margin: 0; color: rgba(255,255,255,.58); font-size: 11px; line-height: 1.55; }
+
+    .studio-panel { width: min(1240px, calc(100vw - 32px)); max-height: min(92vh, 1050px); }
+    .studio-panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+    .studio-panel-header h2 { margin: 0; font: 400 clamp(34px, 5vw, 52px)/1 var(--serif); }
+    .studio-kicker { margin: 0 0 8px; color: #d7b993; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    .studio-panel-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+    .studio-panel-tools button { min-width: 46px; min-height: 44px; padding: 0 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 2px; background: rgba(255,255,255,.04); color: var(--ink); cursor: pointer; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .studio-panel-tools button:hover { border-color: #d7b993; }
+    .studio-lede { max-width: 700px; margin: -8px 0 24px; color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.6; }
+    .family-grid, .studio-resource-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .colour-shortcuts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 20px; }
+    .colour-shortcuts button { min-height: 48px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.045); color: var(--ink); cursor: pointer; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-align: left; text-transform: uppercase; }
+    .colour-shortcuts button:hover { border-color: #d7b993; }
+    .family-card, .studio-resource-card { min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.045); }
+    .family-card { min-height: 205px; padding: 17px; background: linear-gradient(145deg, color-mix(in srgb, var(--family-color) 45%, transparent), rgba(38,42,37,.9) 77%); }
+    .family-card h3, .studio-resource-card h3 { margin: 0; font: 400 24px/1.1 var(--serif); }
+    .family-swatches { display: flex; margin: 18px 0; }
+    .family-swatches span { width: 35px; height: 35px; margin-left: -5px; border: 2px solid rgba(40,43,38,.85); border-radius: 50%; }
+    .family-swatches span:first-child { margin-left: 0; }
+    .family-card button, .studio-button { min-height: 46px; padding: 0 16px; border: 1px solid rgba(255,255,255,.44); border-radius: 2px; background: rgba(20,23,20,.32); color: var(--ink); cursor: pointer; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+    .colour-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .colour-card { display: grid; grid-template-columns: 72px 1fr; min-height: 92px; align-items: center; gap: 14px; padding: 10px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.045); color: var(--ink); text-align: left; cursor: pointer; }
+    .colour-chip { width: 72px; height: 72px; border: 1px solid rgba(255,255,255,.35); }
+    .colour-card strong { display: block; font: 400 19px/1.15 var(--serif); }
+    .colour-card small { display: block; margin-top: 5px; color: rgba(255,255,255,.58); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .colour-detail-layout { display: grid; grid-template-columns: minmax(180px, .7fr) 1.3fr; gap: 26px; align-items: start; }
+    .colour-hero-chip { min-height: 290px; border: 1px solid rgba(255,255,255,.25); box-shadow: inset 0 0 55px rgba(0,0,0,.08); }
+    .colour-detail-copy h3 { margin: 0 0 10px; font: 400 clamp(32px, 4vw, 48px)/1 var(--serif); }
+    .colour-detail-copy p { color: rgba(255,255,255,.73); font-size: 13px; line-height: 1.6; }
+    .exact-colour-link { display: inline-block; margin: 4px 0 20px; color: #ead9bd; font-size: 12px; text-underline-offset: 4px; }
+    .complementary-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 12px 0 22px; }
+    .complementary-card { min-width: 0; padding: 8px; border: 1px solid rgba(255,255,255,.17); background: rgba(255,255,255,.04); }
+    .complementary-card span { display: block; height: 48px; margin-bottom: 7px; }
+    .complementary-card a { color: rgba(255,255,255,.88); font-size: 9px; }
+    .room-gallery { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 12px 0 20px; }
+    .room-gallery a { position: relative; min-height: 92px; display: flex; align-items: flex-end; padding: 8px; background-position: center; background-size: cover; color: #fff; font-size: 9px; font-weight: 600; text-decoration: none; text-shadow: 0 1px 5px #111; }
+    .studio-link-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .studio-link-row a, .studio-link-row button { min-height: 44px; display: inline-flex; align-items: center; padding: 0 13px; border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.04); color: var(--ink); cursor: pointer; font-size: 9px; font-weight: 600; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+    .studio-link-row a:hover, .studio-link-row button:hover { border-color: #d7b993; }
+    .palette-product-ask { display: flex; align-items: center; gap: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.2); }
+    .palette-product-ask p { margin: 0 auto 0 0; color: rgba(255,255,255,.76); font-size: 12px; }
+    .palette-product-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .palette-product-list a { padding: 13px; border: 1px solid rgba(255,255,255,.18); color: #ead9bd; font-size: 11px; text-decoration: none; }
+    .studio-resource-card img { width: 100%; height: 145px; object-fit: cover; }
+    .studio-resource-card div { padding: 14px; }
+    .studio-resource-card p { color: rgba(255,255,255,.7); font-size: 11px; line-height: 1.5; }
+    .studio-resource-card a { color: #ead9bd; font-size: 10px; text-underline-offset: 3px; }
+    .brochure-carousel { position: relative; overflow: hidden; padding: 8px 0 18px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+    .studio-panel.brochure-mode .studio-panel-tools { display: none; }
+    .brochure-track { display: flex; width: max-content; gap: 18px; animation: brochure-flow 56s linear infinite; }
+    .brochure-carousel:hover .brochure-track, .brochure-carousel:focus-within .brochure-track { animation-play-state: paused; }
+    .brochure-card { width: clamp(230px, 17vw, 320px); flex: 0 0 auto; padding: 10px; border: 1px solid rgba(255,255,255,.2); border-radius: 3px; background: rgba(255,255,255,.055); color: var(--ink); cursor: pointer; text-align: left; box-shadow: 0 16px 38px rgba(0,0,0,.2); transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .brochure-card:hover, .brochure-card:focus-visible { z-index: 1; border-color: rgba(234,217,189,.8); outline: none; box-shadow: 0 18px 48px rgba(0,0,0,.28), 0 0 22px rgba(234,217,189,.22); transform: translateY(-5px); }
+    .brochure-cover { position: relative; display: block; overflow: hidden; aspect-ratio: .71; background: #50544c; }
+    .brochure-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) brightness(.77); transition: transform .6s ease; }
+    .brochure-card:hover .brochure-cover img { transform: scale(1.05); }
+    .brochure-cover::after { position: absolute; inset: 0; content: ""; background: linear-gradient(0deg, rgba(20,23,20,.78), transparent 70%), linear-gradient(180deg, rgba(20,23,20,.28), transparent 42%); }
+    .brochure-brand, .brochure-cover-title, .brochure-cover-type { position: absolute; z-index: 1; left: 16px; right: 16px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.48); }
+    .brochure-brand { top: 16px; font-size: 9px; font-weight: 600; letter-spacing: .2em; }
+    .brochure-cover-title { bottom: 38px; font: 400 clamp(22px, 1.8vw, 30px)/1.02 var(--serif); }
+    .brochure-cover-type { bottom: 17px; font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+    .brochure-card-footer { display: grid; grid-template-columns: 1fr 64px; align-items: center; gap: 10px; padding: 11px 2px 1px; }
+    .brochure-title { display: block; font: 400 17px/1.1 var(--serif); }
+    .brochure-card-qr { display: grid; width: 64px; height: 64px; place-items: center; padding: 3px; background: #fff; }
+    .brochure-card-qr canvas, .brochure-card-qr img { display: block; width: 58px !important; height: 58px !important; }
+    .brochure-actionbar { position: sticky; bottom: -1px; z-index: 2; display: flex; justify-content: center; gap: 10px; margin: 20px -8px -8px; padding: 16px 8px 8px; background: linear-gradient(0deg, #30362f 76%, transparent); }
+    .brochure-actionbar a, .brochure-actionbar button { min-width: 210px; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 20px; border: 1px solid rgba(255,255,255,.48); border-radius: 2px; background: rgba(255,255,255,.06); color: var(--ink); cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
+    .brochure-actionbar a { border-color: #d7b993; background: #d7b993; color: #282d27; }
+    .brochure-detail { width: min(940px, calc(100vw - 32px)); max-width: none; max-height: 90vh; padding: 25px; border: 1px solid rgba(255,255,255,.3); border-radius: 3px; background: #30362f; color: var(--ink); box-shadow: 0 25px 100px rgba(0,0,0,.5); }
+    .brochure-detail::backdrop { background: rgba(13,16,14,.82); -webkit-backdrop-filter: blur(9px); backdrop-filter: blur(9px); }
+    .brochure-detail-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+    .brochure-detail-header h2 { margin: 0; font: 400 clamp(26px, 4vw, 40px)/1.05 var(--serif); }
+    .brochure-detail-close { width: 44px; height: 44px; flex: 0 0 44px; border: 1px solid rgba(255,255,255,.4); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; font-size: 22px; }
+    .brochure-detail-content { display: grid; grid-template-columns: minmax(220px, .75fr) 1fr; gap: 28px; align-items: center; }
+    .brochure-detail-cover { position: relative; overflow: hidden; aspect-ratio: .71; background: #50544c; box-shadow: 0 18px 42px rgba(0,0,0,.32); }
+    .brochure-detail-cover img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; filter: saturate(.82) brightness(.77); }
+    .brochure-detail-cover::after { position: absolute; inset: 0; content: ""; background: linear-gradient(0deg, rgba(20,23,20,.78), transparent 70%); }
+    .brochure-detail-qr { display: grid; width: min(280px, 70vw); height: min(280px, 70vw); place-items: center; margin: 0 auto 18px; padding: 10px; background: #fff; }
+    .brochure-detail-qr canvas, .brochure-detail-qr img { display: block; width: 100% !important; height: 100% !important; }
+    .brochure-scan-prompt { margin: 0; color: rgba(255,255,255,.92); font: 400 clamp(22px, 3vw, 32px)/1.1 var(--serif); text-align: center; }
+    @keyframes brochure-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .brochure-track { animation: none; } }
+    .signup-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 720px; }
+    .signup-form label { display: grid; gap: 7px; color: rgba(255,255,255,.83); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .signup-form input, .signup-form select { min-height: 48px; padding: 0 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 2px; background: rgba(255,255,255,.07); color: var(--ink); font: 14px var(--sans); }
+    .signup-form select { color-scheme: dark; }
+    .signup-form .consent, .signup-form .signup-actions { grid-column: 1 / -1; }
+    .signup-form .consent { display: flex; align-items: flex-start; gap: 10px; text-transform: none; letter-spacing: 0; line-height: 1.5; }
+    .signup-form .consent input { min-height: 18px; width: 18px; margin: 0; accent-color: #d7b993; }
+    .signup-status { min-height: 22px; color: #ead9bd; font-size: 12px; }
+
+    .product-photo-link {
+      display: grid;
+      min-height: 142px;
+      place-items: center;
+      margin: 0 0 13px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.055);
+    }
+
+    .product-photo {
+      display: block;
+      width: 100%;
+      height: 142px;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .takeaway-section { padding-top: 20px; border-top: 1px solid rgba(255,255,255,.2); }
+    .takeaway-layout { display: grid; grid-template-columns: 190px 1fr; align-items: center; gap: 22px; }
+    .takeaway-qr { display: grid; width: 190px; height: 190px; place-items: center; padding: 8px; background: #fff; }
+    .takeaway-qr canvas, .takeaway-qr img { display: block; max-width: 100%; max-height: 100%; }
+    .takeaway-copy p { margin: 0 0 14px; color: rgba(255,255,255,.78); font-size: 12px; line-height: 1.6; }
+    .takeaway-copy .takeaway-email { display: inline-block; margin-right: 12px; color: #ead9bd; font-size: 11px; text-underline-offset: 3px; }
+    .takeaway-copy button { min-height: 42px; padding: 0 17px; border: 1px solid #d7b993; border-radius: 2px; background: #d7b993; color: #282d27; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .takeaway-list { display: none; }
+
+    @media print {
+      @page { margin: 14mm; }
+      body * { visibility: hidden !important; }
+      #project-assistant[open] { position: static; display: block; width: auto; max-width: none; max-height: none; margin: 0; padding: 0; overflow: visible; border: 0; background: #fff; color: #222; box-shadow: none; visibility: visible !important; }
+      #project-assistant .project-header,
+      #project-assistant .project-progress,
+      #project-assistant #project-wizard-actions,
+      #project-step-content > .project-results > *:not(.takeaway-section) { display: none !important; }
+      #studio-panel[open] { position: static; display: block; width: auto; max-width: none; max-height: none; margin: 0; padding: 0; overflow: visible; border: 0; background: #fff; color: #222; box-shadow: none; visibility: visible !important; }
+      #studio-panel[open], #studio-panel[open] * { visibility: visible !important; }
+      #studio-panel .studio-panel-tools { display: none !important; }
+      #studio-panel .studio-resource-card { break-inside: avoid; border-color: #ccc; color: #222; }
+      #studio-panel .studio-resource-card p, #studio-panel .studio-resource-card h3 { color: #222; }
+      #studio-panel .studio-resource-card a { color: #222; }
+      #takeaway-print,
+      #takeaway-print * { visibility: visible !important; }
+      #takeaway-print { position: absolute; inset: 0 auto auto 0; display: block; width: 100%; padding: 0; border: 0; color: #222; }
+      #takeaway-print .project-section-heading h3,
+      #takeaway-print .takeaway-copy p,
+      #takeaway-print .takeaway-list { color: #222; }
+      #takeaway-print .takeaway-layout { grid-template-columns: 160px 1fr; }
+      #takeaway-print .takeaway-qr { width: 160px; height: 160px; border: 1px solid #ddd; }
+      #takeaway-print .takeaway-copy button { display: none; }
+      #takeaway-print .takeaway-list { display: block; margin: 22px 0 0; padding-left: 20px; }
+      #takeaway-print .takeaway-list li { margin: 0 0 8px; font-size: 10pt; }
+      #takeaway-print .takeaway-list a { display: block; color: #444; font-size: 8pt; overflow-wrap: anywhere; }
+      #takeaway-print .project-index { color: #755c3f; }
+    }
+
+    .screen.started .hero,
+    .screen.started .discovery,
+    .screen.started .ribbon,
+    .screen.started .swatch-orbit,
+    .screen.started .paint-dots {
+      animation-play-state: paused;
+    }
+
+    .screen.attract .discovery,
+    .screen.attract .ribbon { opacity: 0; pointer-events: none; transition: opacity .45s ease; }
+
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+      50% { transform: translate3d(0, -9px, 0) rotate(1deg); }
+    }
+
+    @keyframes image-breathe {
+      from { transform: scale(1); }
+      to { transform: scale(1.045); }
+    }
+
+    @keyframes collage-arrive {
+      from { opacity: 0; transform: scale(1.06); }
+      to { opacity: 1; transform: scale(1.025); }
+    }
+
+    @media (min-width: 2500px) {
+      .hero { width: 780px; }
+      .subheadline { max-width: 520px; }
+      .discovery { gap: 18px; }
+      .discovery-card { min-height: 112px; grid-template-columns: 52px 1fr 20px; gap: 18px; padding: 20px; }
+      .card-icon { width: 48px; height: 48px; }
+      .ribbon { min-height: 90px; }
+      .ribbon-links button { font-size: 13px; }
+    }
+
+    @media (min-width: 1001px) and (max-width: 1600px) {
+      .hero { top: 24%; left: 6.5%; width: 43vw; }
+      h1 { font-size: clamp(54px, 6.2vw, 88px); }
+      .discovery { top: 25%; right: 5.5%; width: 44vw; gap: 9px; }
+      .discovery-card { min-height: 84px; grid-template-columns: 36px 1fr 14px; gap: 9px; padding: 11px; }
+      .card-icon { width: 34px; height: 34px; font-size: 18px; }
+      .card-title { font-size: 17px; }
+    }
+
+    @media (max-width: 1000px) {
+      .hero { left: 7%; top: 23%; width: 46vw; }
+      h1 { font-size: clamp(60px, 8.5vw, 92px); }
+      .discovery { right: 6%; width: 43vw; gap: 9px; }
+      .discovery-card { min-height: 76px; grid-template-columns: 34px 1fr 14px; gap: 8px; padding: 10px; }
+      .card-icon { width: 32px; height: 32px; font-size: 18px; }
+      .card-title { font-size: 16px; }
+      .card-caption { font-size: 8px; }
+      .ribbon { left: 4%; right: 4%; padding: 0 17px; gap: 12px; }
+      .ribbon-label { display: none; }
+      .ribbon-links { max-width: none; }
+      .ribbon-links button { font-size: 9px; letter-spacing: .08em; }
+      .swatch-orbit { right: 30%; bottom: 24%; transform: scale(.8); }
+    }
+
+    @media (max-width: 700px) {
+      .screen { min-height: 900px; height: 100dvh; overflow-y: auto; }
+      .collage { grid-template-columns: 1.1fr .9fr; grid-template-rows: 1.2fr .8fr 1fr; }
+      .scene-1 { grid-column: 1 / 3; grid-row: 1 / 3; }
+      .scene-2 { grid-column: 2; grid-row: 1; opacity: .7; }
+      .scene-3 { grid-column: 2; grid-row: 2 / 4; }
+      .scene-4 { grid-column: 1; grid-row: 2 / 4; }
+      .scene-5 { grid-column: 1 / 3; grid-row: 3; }
+      .scene-6 { display: none; }
+      .veil { background: linear-gradient(90deg, rgba(27,30,27,.67), rgba(29,31,28,.32)), linear-gradient(0deg, rgba(24,27,25,.86), transparent 55%, rgba(25,28,27,.3)); }
+      .topbar { top: 22px; left: 6%; right: 6%; }
+      .brand { gap: 7px; font-size: 10px; }
+      .brand-mark { width: 27px; height: 27px; }
+      .edition { font-size: 8px; }
+      .hero { top: 13%; left: 7%; width: 86%; }
+      .eyebrow { margin-bottom: 17px; font-size: 9px; }
+      h1 { font-size: clamp(58px, 14vw, 86px); }
+      .subheadline { max-width: 360px; margin-top: 19px; font-size: 14px; }
+      .begin { margin-top: 23px; font-size: 10px; }
+      .discovery { top: 47%; right: 7%; bottom: auto; left: 7%; width: auto; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .discovery-card { min-height: 66px; grid-template-columns: 28px 1fr; gap: 7px; padding: 8px; }
+      .card-icon { width: 26px; height: 26px; font-size: 16px; }
+      .card-title { font-size: 14px; }
+      .card-caption, .card-arrow { display: none; }
+      .swatch-orbit { right: 10%; bottom: 39%; transform: scale(.62); transform-origin: right center; }
+      .paint-dots { left: 7%; bottom: 15%; gap: 5px; padding: 7px 9px; }
+      .paint-dots span { width: 15px; height: 15px; }
+      .ribbon { right: 4%; bottom: 4%; left: 4%; min-height: 60px; padding: 0 12px; }
+      .ribbon-links { gap: 7px; }
+      .ribbon-links button { font-size: 7px; letter-spacing: .035em; white-space: normal; text-align: center; line-height: 1.3; }
+      .inspiration-note, .footnote { display: none; }
+      .calculator-grid { gap: 14px 12px; }
+      .calculator-actions { align-items: flex-start; flex-direction: column; }
+      .calculator-done { width: 100%; }
+      .project-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .project-option { min-height: 50px; padding: 10px; font-size: 12px; }
+      .summary-grid, .recommendation-grid { grid-template-columns: 1fr; gap: 10px; }
+      .project-resource-links { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .takeaway-layout { grid-template-columns: 110px 1fr; gap: 14px; }
+      .takeaway-qr { width: 110px; height: 110px; padding: 5px; }
+      .takeaway-copy button { padding: 0 11px; font-size: 8px; }
+      .product-photo-link, .product-photo { min-height: 118px; height: 118px; }
+      .global-tools { gap: 5px; }
+      .global-tools button { width: 28px; height: 28px; font-size: 12px; }
+      .edition { display: none; }
+      .studio-panel-header { flex-direction: column; }
+      .studio-panel-tools { justify-content: flex-start; }
+      .family-grid, .studio-resource-grid, .colour-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .colour-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .family-card { min-height: 180px; padding: 12px; }
+      .family-card h3, .studio-resource-card h3 { font-size: 19px; }
+      .colour-card { grid-template-columns: 46px 1fr; min-height: 68px; gap: 9px; padding: 7px; }
+      .colour-chip { width: 46px; height: 52px; }
+      .colour-card strong { font-size: 15px; }
+      .colour-detail-layout { grid-template-columns: 1fr; gap: 14px; }
+      .colour-hero-chip { min-height: 140px; }
+      .complementary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .room-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .signup-form { grid-template-columns: 1fr; }
+      .signup-form .consent, .signup-form .signup-actions { grid-column: auto; }
+      .palette-product-ask { align-items: stretch; flex-wrap: wrap; }
+      .palette-product-ask p { flex: 1 0 100%; }
+      .palette-product-list { grid-template-columns: 1fr; }
+      .brochure-track { gap: 10px; }
+      .brochure-card { width: min(62vw, 270px); padding: 7px; }
+      .brochure-card-qr { width: 58px; height: 58px; }
+      .brochure-card-qr canvas, .brochure-card-qr img { width: 52px !important; height: 52px !important; }
+      .brochure-actionbar { gap: 7px; }
+      .brochure-actionbar a, .brochure-actionbar button { min-width: 0; flex: 1; padding: 0 9px; font-size: 8px; letter-spacing: .07em; }
+      .brochure-detail { padding: 16px; }
+      .brochure-detail-content { grid-template-columns: minmax(120px, .65fr) 1fr; gap: 14px; }
+      .brochure-detail-qr { width: min(210px, 42vw); height: min(210px, 42vw); padding: 7px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="screen" id="screen" aria-label="Resene colour inspiration kiosk">
+    <div class="collage" aria-hidden="true">
+      <div class="scene scene-1"></div>
+      <div class="scene scene-2"></div>
+      <div class="scene scene-3"></div>
+      <div class="scene scene-4"></div>
+      <div class="scene scene-5"></div>
+      <div class="scene scene-6"></div>
+    </div>
+    <div class="veil" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">R</span><span>RESENE COLOUR STUDIO</span></div>
+      <div class="global-tools" aria-label="Kiosk controls">
+        <button type="button" data-studio-home aria-label="Home" title="Home">⌂</button>
+        <button type="button" data-kiosk-back aria-label="Back" title="Back">←</button>
+        <button type="button" data-kiosk-help aria-label="Help" title="Help">?</button>
+        <button type="button" data-start-again aria-label="Start again" title="Start again">↻</button>
+      </div>
+      <div class="edition">Premium colour studio</div>
+    </header>
+
+    <section class="hero" aria-labelledby="headline">
+      <p class="eyebrow">A more colourful way to live</p>
+      <h1 id="headline"><span>Step into a</span><span>world of colour</span></h1>
+      <p class="subheadline">Discover colours, products, inspiration, project advice and DIY guidance.</p>
+      <button class="begin" type="button" data-action="begin">
+        <span class="begin-mark" aria-hidden="true">+</span>
+        <span>Touch anywhere to begin</span>
+      </button>
+    </section>
+
+    <div class="inspiration-note" aria-hidden="true">Find your point of view</div>
+
+    <nav class="discovery" aria-label="Explore Resene">
+      <button class="discovery-card" type="button" data-open-projects>
+        <span class="card-icon" aria-hidden="true">⌂</span>
+        <span><span class="card-title">What are you painting today?</span><span class="card-caption">Get a complete project plan</span></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="discovery-card" type="button" data-open-studio data-studio-view="colors">
+        <span class="card-icon" aria-hidden="true">◉</span>
+        <span><span class="card-title">Shop by colour</span><span class="card-caption">Explore colours and palettes</span></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="discovery-card" type="button" data-open-studio data-studio-view="videos">
+        <span class="card-icon" aria-hidden="true">▷</span>
+        <span><span class="card-title">How-to videos</span><span class="card-caption">Watch expert project guides</span></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="discovery-card" type="button" data-open-studio data-studio-view="brochures">
+        <span class="card-icon" aria-hidden="true">▤</span>
+        <span><span class="card-title">Digital brochures</span><span class="card-caption">Browse guides and resources</span></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="discovery-card" type="button" data-open-studio data-studio-view="signup">
+        <span class="card-icon" aria-hidden="true">＋</span>
+        <span><span class="card-title">Sign up &amp; save</span><span class="card-caption">Hear about colour and offers</span></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="discovery-card" type="button" data-open-studio data-studio-view="promotions">
+        <span class="card-icon" aria-hidden="true">✦</span>
+        <span><span class="card-title">Current promotions</span><span class="card-caption">See what’s happening now</span></span>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </button>
+    </nav>
+
+    <div class="swatch-orbit" aria-label="A fan of colour swatches">
+      <span class="swatch"></span><span class="swatch"></span><span class="swatch"></span><span class="swatch"></span><span class="swatch"></span>
+    </div>
+
+    <div class="paint-dots" aria-label="Sage, terracotta, soft neutral, charcoal and warm white colour chips">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <nav class="ribbon" aria-label="Quick links">
+      <span class="ribbon-label">Explore</span>
+      <div class="ribbon-links">
+        <button type="button" data-open-studio data-studio-view="colors">Colour Inspiration</button>
+        <button type="button" data-action="DIY Projects" data-open-projects>DIY Projects</button>
+        <button type="button" data-open-studio data-studio-view="videos">How-To Videos</button>
+        <button type="button" data-open-projects>Product Recommendations</button>
+        <button type="button" data-open-studio data-studio-view="brochures">Brochures</button>
+        <button type="button" data-action="Paint Calculator" data-open-calculator>Paint Calculator</button>
+      </div>
+    </nav>
+    <div class="footnote">Colour lives here</div>
+
+    <dialog class="calculator" id="paint-calculator" aria-labelledby="calculator-title">
+      <div class="calculator-header">
+        <div>
+          <p class="calculator-eyebrow">A considered estimate</p>
+          <h2 id="calculator-title">Paint calculator</h2>
+          <p class="calculator-product-name" id="calculator-product-name" hidden></p>
+        </div>
+        <nav class="studio-panel-tools" aria-label="Calculator controls">
+          <button type="button" data-studio-home>Home</button>
+          <button type="button" data-kiosk-back>Back</button>
+          <button type="button" data-kiosk-help>Help</button>
+          <button type="button" data-start-again>Start again</button>
+          <button class="calculator-close" type="button" aria-label="Close calculator" data-close-calculator>&times;</button>
+        </nav>
+      </div>
+      <form id="calculator-form">
+        <div class="calculator-grid">
+          <div class="calculator-field">
+            <label for="room-length">Room length (m)</label>
+            <input id="room-length" name="length" type="number" min="0.1" max="100" step="0.1" value="5" required>
+          </div>
+          <div class="calculator-field">
+            <label for="room-width">Room width (m)</label>
+            <input id="room-width" name="width" type="number" min="0.1" max="100" step="0.1" value="4" required>
+          </div>
+          <div class="calculator-field">
+            <label for="wall-height">Wall height (m)</label>
+            <input id="wall-height" name="height" type="number" min="0.1" max="20" step="0.1" value="2.4" required>
+          </div>
+          <div class="calculator-field">
+            <label for="paint-surface">Surface to paint</label>
+            <select id="paint-surface" name="surface">
+              <option value="walls">Walls</option>
+              <option value="walls-ceiling">Walls and ceiling</option>
+              <option value="ceiling">Ceiling only</option>
+            </select>
+          </div>
+          <div class="calculator-field">
+            <label for="opening-area">Doors and windows (m²)</label>
+            <input id="opening-area" name="openings" type="number" min="0" max="1000" step="0.1" value="3.6">
+          </div>
+          <div class="calculator-field">
+            <label for="paint-coats">Number of coats</label>
+            <select id="paint-coats" name="coats">
+              <option value="1">1 coat</option>
+              <option value="2" selected>2 coats</option>
+              <option value="3">3 coats</option>
+            </select>
+          </div>
+          <div class="calculator-field">
+            <label for="coverage-rate">Coverage (m² per litre)</label>
+            <input id="coverage-rate" name="coverage" type="number" min="1" max="30" step="0.5" value="10" required>
+          </div>
+        </div>
+        <p class="calculator-note">Enter the room dimensions and the coverage rate from your chosen paint. This estimate deducts the opening area from wall surfaces and rounds up to the nearest tenth of a litre.</p>
+        <div class="calculator-result" aria-live="polite">
+          <span class="calculator-result-label">Estimated paint required</span>
+          <output id="paint-estimate" for="room-length room-width wall-height paint-surface opening-area paint-coats coverage-rate">5.4 L</output>
+        </div>
+        <div class="calculator-actions">
+          <a href="https://www.resene.co.nz/homeown/problem-solver/paint-calculator.htm#estimating-paint-info" target="_blank" rel="noopener noreferrer">Open Resene’s detailed calculator</a>
+          <button class="calculator-done" type="button" data-close-calculator>Back to inspiration</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="project-assistant" id="project-assistant" aria-labelledby="project-assistant-title">
+      <header class="project-header">
+        <div>
+          <span class="project-step-label" id="project-step-label">Step 1 of 4</span>
+          <h2 id="project-assistant-title">Your project, considered</h2>
+        </div>
+        <nav class="studio-panel-tools" aria-label="Project controls">
+          <button type="button" data-studio-home>Home</button>
+          <button type="button" data-kiosk-back>Back</button>
+          <button type="button" data-kiosk-help>Help</button>
+          <button type="button" data-start-again>Start again</button>
+          <button class="project-close" type="button" aria-label="Close project assistant" data-close-projects>&times;</button>
+        </nav>
+      </header>
+      <div class="project-progress" aria-hidden="true"><span id="project-progress-fill"></span></div>
+      <div id="project-step-content"></div>
+      <div class="wizard-actions" id="project-wizard-actions">
+        <button type="button" id="project-back" disabled>Back</button>
+        <button type="button" id="project-next" disabled>Continue</button>
+      </div>
+    </dialog>
+
+    <dialog class="project-assistant studio-panel" id="studio-panel" aria-labelledby="studio-panel-title">
+      <header class="studio-panel-header">
+        <div>
+          <p class="studio-kicker" id="studio-panel-kicker">Resene Colour Studio</p>
+          <h2 id="studio-panel-title">Shop by colour</h2>
+        </div>
+        <nav class="studio-panel-tools" aria-label="Studio controls">
+          <button type="button" data-studio-home>Home</button>
+          <button type="button" data-kiosk-back>Back</button>
+          <button type="button" data-kiosk-help>Help</button>
+          <button type="button" data-start-again>Start again</button>
+          <button type="button" data-close-studio aria-label="Close section">Close</button>
+        </nav>
+      </header>
+      <div id="studio-content"></div>
+    </dialog>
+
+    <dialog class="brochure-detail" id="brochure-detail" aria-labelledby="brochure-detail-title">
+      <header class="brochure-detail-header">
+        <h2 id="brochure-detail-title"></h2>
+        <button class="brochure-detail-close" type="button" data-close-brochure aria-label="Close brochure">&times;</button>
+      </header>
+      <div class="brochure-detail-content">
+        <div class="brochure-detail-cover">
+          <img id="brochure-detail-image" src="" alt="">
+          <span class="brochure-brand">RESENE</span>
+          <span class="brochure-cover-title" id="brochure-detail-cover-title"></span>
+          <span class="brochure-cover-type" id="brochure-detail-type"></span>
+        </div>
+        <div>
+          <div class="brochure-detail-qr" id="brochure-detail-qr" role="img" aria-label="QR code to view this brochure on your phone"></div>
+          <p class="brochure-scan-prompt">Scan to view on your phone</p>
+        </div>
+      </div>
+    </dialog>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const screen = document.querySelector("#screen");
+    const begin = document.querySelector('[data-action="begin"]');
+    const calculator = document.querySelector("#paint-calculator");
+    const calculatorForm = document.querySelector("#calculator-form");
+    const paintEstimate = document.querySelector("#paint-estimate");
+    const projectAssistant = document.querySelector("#project-assistant");
+    const projectStepContent = document.querySelector("#project-step-content");
+    const projectStepLabel = document.querySelector("#project-step-label");
+    const projectProgressFill = document.querySelector("#project-progress-fill");
+    const projectWizardActions = document.querySelector("#project-wizard-actions");
+    const projectBack = document.querySelector("#project-back");
+    const projectNext = document.querySelector("#project-next");
+    const calculatorProductName = document.querySelector("#calculator-product-name");
+    const projectQuestions = [
+      { key: "project", title: "What are you painting?", options: ["Walls", "Ceiling", "Deck", "Fence", "Exterior House", "Roof", "Furniture", "Concrete", "Brick", "Metal"] },
+      { key: "surface", title: "What material is it?", options: ["Timber", "Plasterboard", "Concrete", "Brick", "Metal", "Previously Painted"] },
+      { key: "condition", title: "What condition is it in?", options: ["New", "Good", "Weathered", "Peeling", "Flaking", "Mouldy", "Previously Stained"] },
+      { key: "finish", title: "What finish would you like?", options: ["Flat", "Matte", "Low Sheen", "Semi Gloss", "Gloss", "Natural Timber Finish"] }
+    ];
+    let projectStep = 0;
+    let projectAnswers = {};
+    let currentProjectSummary = null;
+    let currentProjectItems = [];
+    let activeRecommendedProduct = "";
+    let latestPaintEstimate = "";
+    const colourFamilies = [
+      { name: "Whites & off whites", color: "#d8d5ca", colours: ["White Pointer", "Alabaster", "Rice Cake"] },
+      { name: "Greys & charcoals", color: "#555957", colours: ["Baring Head", "Foundry", "Gravel"] },
+      { name: "Greens", color: "#627366", colours: ["Paddock", "Karaka", "Eucalyptus"] },
+      { name: "Blues", color: "#5b7885", colours: ["Coast", "Half Breathless", "Blue Smoke"] },
+      { name: "Earth tones", color: "#9b7156", colours: ["Thunderstorm", "Baked", "Tuscany"] },
+      { name: "Bold & statement", color: "#a84b42", colours: ["Flame Red", "Wild Thing", "Fuchsia"] }
+    ];
+    const colourDetails = {
+      "White Pointer": { hex: "#d8d5ca", description: "A quiet, softened white for bright and balanced rooms.", complements: ["Foundry", "Paddock", "Tuscany"] },
+      Alabaster: { hex: "#eeede6", description: "A gentle warm white that brings light without feeling stark.", complements: ["Baring Head", "Eucalyptus", "Baked"] },
+      "Rice Cake": { hex: "#d4d0bf", description: "A natural off-white with a soft, earthy character.", complements: ["Gravel", "Karaka", "Tuscany"] },
+      "Baring Head": { hex: "#555957", description: "A grounded charcoal that adds definition and calm depth.", complements: ["White Pointer", "Paddock", "Baked"] },
+      Foundry: { hex: "#373b3a", description: "A deep architectural grey for confident, considered accents.", complements: ["Alabaster", "Eucalyptus", "Wild Thing"] },
+      Gravel: { hex: "#777875", description: "A versatile mid-grey that sits easily with natural materials.", complements: ["Rice Cake", "Karaka", "Fuchsia"] },
+      Paddock: { hex: "#76826e", description: "A soft botanical green inspired by the quiet of the outdoors.", complements: ["White Pointer", "Baring Head", "Tuscany"] },
+      Karaka: { hex: "#35443c", description: "A rich, leafy green that creates an intimate, enveloping mood.", complements: ["Rice Cake", "Gravel", "Baked"] },
+      Eucalyptus: { hex: "#91a098", description: "A muted green-grey with an easy, restorative feel.", complements: ["Alabaster", "Foundry", "Wild Thing"] },
+      Coast: { hex: "#63828b", description: "A softened coastal blue with a naturally relaxed character.", complements: ["White Pointer", "Gravel", "Tuscany"] },
+      "Half Breathless": { hex: "#b0c7c7", description: "A pale blue-green that lends rooms a fresh, open quality.", complements: ["Alabaster", "Baring Head", "Baked"] },
+      "Blue Smoke": { hex: "#71878c", description: "A nuanced blue-grey that pairs beautifully with timber and stone.", complements: ["Rice Cake", "Karaka", "Flame Red"] },
+      Thunderstorm: { hex: "#55504a", description: "A deep, atmospheric neutral that anchors a timeless palette.", complements: ["Baring Head", "White Pointer", "Stepping Stone"] },
+      Baked: { hex: "#a8684d", description: "A warm terracotta that brings a welcoming, crafted quality.", complements: ["Alabaster", "Paddock", "Blue Smoke"] },
+      Tuscany: { hex: "#c08a68", description: "A sun-warmed earth tone with an easy, expressive presence.", complements: ["Rice Cake", "Karaka", "Coast"] },
+      "Flame Red": { hex: "#bd5145", description: "A spirited red for a confident accent or expressive feature.", complements: ["White Pointer", "Eucalyptus", "Blue Smoke"] },
+      "Wild Thing": { hex: "#dc7846", description: "A bright, optimistic statement shade with lively warmth.", complements: ["Alabaster", "Foundry", "Eucalyptus"] },
+      Fuchsia: { hex: "#a94e71", description: "A vivid berry accent that brings personality to a room.", complements: ["Gravel", "Paddock", "White Pointer"] },
+      "Stepping Stone": { hex: "#9a9488", description: "A composed stone neutral for layering with deep and soft colours.", complements: ["Thunderstorm", "Alabaster", "Paddock"] }
+    };
+    const studioPanel = document.querySelector("#studio-panel");
+    const studioContent = document.querySelector("#studio-content");
+    const studioTitle = document.querySelector("#studio-panel-title");
+    const studioKicker = document.querySelector("#studio-panel-kicker");
+    const brochureDetail = document.querySelector("#brochure-detail");
+    const brochureDetailTitle = document.querySelector("#brochure-detail-title");
+    const brochureDetailImage = document.querySelector("#brochure-detail-image");
+    const brochureDetailCoverTitle = document.querySelector("#brochure-detail-cover-title");
+    const brochureDetailType = document.querySelector("#brochure-detail-type");
+    const brochureDetailQr = document.querySelector("#brochure-detail-qr");
+    const studioHistory = [];
+    let studioView = "colors";
+    let selectedColour = "";
+    let selectedFamily = "";
+    let selectedCollection = "";
+    let selectedPalette = [];
+    let inactivityTimer = null;
+
+    function escapeProjectText(value) {
+      return value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[character]);
+    }
+
+    function exactColourUrl(name) {
+      return `https://www.resene.co.nz/swatches/preview.php?chart=${encodeURIComponent("Resene The Range fashion colours 24")}&brand=Resene&name=${encodeURIComponent(name)}`;
+    }
+
+    function colourCard(name) {
+      const colour = colourDetails[name];
+      return `<button class="colour-card" type="button" data-colour-name="${escapeProjectText(name)}"><span class="colour-chip" style="background:${colour.hex}"></span><span><strong>${escapeProjectText(name)}</strong><small>Explore this colour</small></span></button>`;
+    }
+
+    function renderColourHome() {
+      studioTitle.textContent = "Shop by colour";
+      studioKicker.textContent = "Explore colour families, discover favourites and build your palette";
+      studioContent.innerHTML = `
+        <div class="colour-shortcuts" aria-label="Colour discovery options">
+          <button type="button" data-color-collection="families">Colour families</button>
+          <button type="button" data-color-collection="bestsellers">Best selling colours</button>
+          <button type="button" data-color-collection="bold">Bright &amp; bold colours</button>
+          <button type="button" data-color-collection="rooms">Colours by room</button>
+          <button type="button" data-color-collection="trending">Trending colour stories</button>
+          <button type="button" data-color-collection="inspiration">Colour inspiration</button>
+        </div>
+        <p class="studio-lede">Start with a family, or explore a curated collection. Every colour opens its individual Resene colour page.</p>
+        <div class="family-grid">${colourFamilies.map((family) => `<article class="family-card" style="--family-color:${family.color}"><h3>${family.name}</h3><div class="family-swatches">${family.colours.map((name) => `<span style="background:${colourDetails[name].hex}" title="${name}"></span>`).join("")}</div><button type="button" data-family-name="${family.name}">Explore family</button></article>`).join("")}</div>
+        <div class="studio-link-row"><a href="https://www.resene.co.nz/homeown/colour-inspiration/index.htm" target="_blank" rel="noopener noreferrer">Resene colour inspiration</a><a href="https://www.resene.co.nz/swatches/resene_find_a_colour.php" target="_blank" rel="noopener noreferrer">Find-A-Colour</a><a href="https://www.resene.co.nz/colour-charts.htm" target="_blank" rel="noopener noreferrer">Colour charts</a><a href="https://www.resene.co.nz/swatches/generate_palette.php" target="_blank" rel="noopener noreferrer">Palette generator</a><a href="https://www.resene.co.nz/swatches/colourmatch.php" target="_blank" rel="noopener noreferrer">Colour match</a><a href="https://www.resene.co.nz/ezypaint/" target="_blank" rel="noopener noreferrer">EzyPaint visualiser</a></div>`;
+    }
+
+    function renderColourCollection(names, title) {
+      studioTitle.textContent = title;
+      studioKicker.textContent = "Choose a Resene colour to see its exact colour page and palette";
+      studioContent.innerHTML = `<p class="studio-lede">Explore a considered edit of Resene colours. Screen swatches are indicative; view a physical swatch in your room’s light before deciding.</p><div class="colour-grid">${names.map(colourCard).join("")}</div>`;
+    }
+
+    function renderColourFamily() {
+      const family = colourFamilies.find((item) => item.name === selectedFamily);
+      renderColourCollection(family.colours, family.name);
+    }
+
+    function renderColourDetail() {
+      const colour = colourDetails[selectedColour];
+      const url = exactColourUrl(selectedColour);
+      const roomImages = [
+        ["Living room", "photo-1600210492486-724fe5c67fb0"],
+        ["Bedroom", "photo-1616486338812-3dadae4b4ace"],
+        ["Kitchen", "photo-1600607687939-ce8a6c25118c"],
+        ["Bathroom", "photo-1600566753086-00f18fb6b3ea"],
+        ["Exterior", "photo-1600607687920-4e2a09cf159d"]
+      ];
+      selectedPalette = [selectedColour, ...colour.complements];
+      studioTitle.textContent = "Colour detail";
+      studioKicker.textContent = "Resene colour studio";
+      studioContent.innerHTML = `
+        <div class="colour-detail-layout">
+          <div class="colour-hero-chip" style="background:${colour.hex}" aria-label="${selectedColour} colour swatch"></div>
+          <div class="colour-detail-copy">
+            <h3>${escapeProjectText(selectedColour)}</h3><p>${colour.description}</p>
+            <a class="exact-colour-link" href="${url}" target="_blank" rel="noopener noreferrer">View exact Resene colour page ↗</a>
+            <h4>Complementary colours</h4>
+            <div class="complementary-grid">${colour.complements.map((name) => `<div class="complementary-card"><span style="background:${colourDetails[name].hex}"></span><a href="${exactColourUrl(name)}" target="_blank" rel="noopener noreferrer">${escapeProjectText(name)}</a></div>`).join("")}</div>
+          </div>
+        </div>
+        <h4 id="room-inspiration">Room inspiration</h4><div class="room-gallery">${roomImages.map(([room, image]) => `<a href="https://www.resene.co.nz/homeown/colour-inspiration/index.htm" target="_blank" rel="noopener noreferrer" style="background-image:linear-gradient(0deg,rgba(0,0,0,.55),transparent),url(https://images.unsplash.com/${image}?auto=format&fit=crop&w=480&q=82)">${room}</a>`).join("")}</div>
+        <h4>Colour tools</h4><div class="studio-link-row">
+          <a href="${url}" target="_blank" rel="noopener noreferrer">View colour details</a>
+          <button type="button" data-colour-action="rooms">View inspiration rooms</button>
+          <button type="button" data-colour-action="build">Build colour palette</button>
+          <button type="button" data-colour-action="save">Save palette</button>
+          <a href="mailto:?subject=${encodeURIComponent(`Resene palette: ${selectedColour}`)}&body=${encodeURIComponent(selectedPalette.map((name) => `${name}: ${exactColourUrl(name)}`).join("\n"))}">Email palette</a>
+          <button type="button" data-colour-action="qr">Generate QR code</button>
+        </div><div id="palette-qr-wrap" hidden><div class="takeaway-qr" id="palette-qr" role="img" aria-label="QR code for this colour palette"></div></div>
+        <p class="signup-status" id="palette-status" aria-live="polite"></p>
+        <div class="palette-product-ask"><p>Would you like matching paint recommendations?</p><button class="studio-button" type="button" data-colour-products="yes">Yes, show products</button><button class="studio-button" type="button" data-colour-products="no">Not now</button></div><div class="palette-product-list" id="palette-products" hidden><a href="https://shop.resene.co.nz/paint" target="_blank" rel="noopener noreferrer">Interior paint recommendations</a><a href="https://shop.resene.co.nz/paint" target="_blank" rel="noopener noreferrer">Exterior paint recommendations</a><a href="https://shop.resene.co.nz/paint" target="_blank" rel="noopener noreferrer">Primers and specialty products</a><a href="https://shop.resene.co.nz/key-accessories" target="_blank" rel="noopener noreferrer">Matching accessories</a></div>`;
+    }
+
+    function renderStudioView(view) {
+      studioView = view;
+      studioPanel.classList.toggle("brochure-mode", view === "brochures");
+      if (view === "colors") return renderColourHome();
+      if (view === "family") return renderColourFamily();
+      if (view === "collection") {
+        const collections = {
+          bestsellers: ["White Pointer", "Alabaster", "Baring Head", "Paddock", "Karaka", "Coast"],
+          bold: ["Flame Red", "Wild Thing", "Fuchsia", "Karaka", "Foundry", "Baked"],
+          rooms: ["Alabaster", "Blue Smoke", "Paddock", "Tuscany", "Eucalyptus", "Baring Head"],
+          trending: ["Thunderstorm", "Tuscany", "Eucalyptus", "Foundry", "Baked", "Half Breathless"],
+          inspiration: ["White Pointer", "Baring Head", "Paddock", "Coast", "Tuscany", "Wild Thing"]
+        };
+        const labels = { bestsellers: "Best selling colours", bold: "Bright & bold colours", rooms: "Colours by room", trending: "Trending colour stories", inspiration: "Colour inspiration" };
+        return renderColourCollection(collections[selectedCollection], labels[selectedCollection]);
+      }
+      if (view === "detail") return renderColourDetail();
+      if (view === "videos") return renderVideosView();
+      if (view === "brochures") return renderBrochuresView();
+      if (view === "signup") return renderSignupView();
+      if (view === "promotions") return renderPromotionsView();
+      if (view === "help") return renderHelpView();
+    }
+
+    function renderVideosView() {
+      const videos = [
+        ["Paint walls", "photo-1600210492486-724fe5c67fb0"],
+        ["Paint ceilings", "photo-1600607687939-ce8a6c25118c"],
+        ["Paint weatherboards", "photo-1600607687920-4e2a09cf159d"],
+        ["Paint exterior homes", "photo-1600566753086-00f18fb6b3ea"],
+        ["Paint furniture", "photo-1616486338812-3dadae4b4ace"],
+        ["Wallpaper", "photo-1618221195710-dd6b41faaea6"],
+        ["Surface preparation", "photo-1600607687920-4e2a09cf159d"],
+        ["Staining", "photo-1600210491369-e753d80a41f3"],
+        ["Deck projects", "photo-1600607687939-ce8a6c25118c"]
+      ];
+      const videoUrl = "https://www.resene.co.nz/videos.htm";
+      studioTitle.textContent = "How-to videos";
+      studioKicker.textContent = "Practical advice from Resene";
+      studioContent.innerHTML = `<p class="studio-lede">Browse Resene’s video library by project type. Video lengths vary; open the library to see each clip’s details.</p><div class="studio-resource-grid">${videos.map(([name, image]) => `<article class="studio-resource-card"><img src="https://images.unsplash.com/${image}?auto=format&fit=crop&w=720&q=82" alt="${name} project inspiration" loading="lazy"><div><h3>${name}</h3><p>Duration varies · Resene video collection</p><a href="${videoUrl}" target="_blank" rel="noopener noreferrer">Watch video collection ↗</a><p><button class="studio-button" type="button" data-resource-qr="${videoUrl}">Save to phone · QR</button></p></div></article>`).join("")}</div><div class="takeaway-layout" id="resource-qr-wrap" hidden><div class="takeaway-qr" id="resource-qr" role="img" aria-label="QR code for Resene video library"></div><p class="studio-lede">Scan to open the Resene video library on your phone.</p></div>`;
+    }
+
+    function renderBrochuresView() {
+      const brochures = [
+        { title: "Interior Surfaces", cover: "Interior paint systems", type: "Walls, ceilings & spaces", url: "https://www.resene.co.nz/pdf/painters_interior_surfaces.pdf", image: "https://resenetechspecstoreprod.blob.core.windows.net/siteimages/homepage1.jpg" },
+        { title: "Exterior Timber", cover: "Exterior timber", type: "A guide to paint systems", url: "https://www.resene.co.nz/pdf/painters_exterior_timber.pdf", image: "https://resenetechspecstoreprod.blob.core.windows.net/siteimages/homepage2.jpg" },
+        { title: "Exterior Cement", cover: "Exterior cement", type: "A guide to paint systems", url: "https://www.resene.co.nz/pdf/painters_exterior_cement.pdf", image: "https://resenetechspecstoreprod.blob.core.windows.net/siteimages/homepage3.jpg" },
+        { title: "Roofing", cover: "Roof paint systems", type: "A guide to paint systems", url: "https://www.resene.co.nz/pdf/painters_roofing.pdf", image: "https://resenetechspecstoreprod.blob.core.windows.net/siteimages/096%20-%20stained%20old%20pine%20deck%20-%20C.jpg" },
+        { title: "Woodcare", cover: "Woodcare", type: "A Resene guide", url: "https://www.resene.co.nz/pdf/painters_woodcare.pdf", image: "https://resenetechspecstoreprod.blob.core.windows.net/siteimages/TS0003_E_TJ_woodsman_closeup_of_63LARGE.jpg" },
+        { title: "General Information", cover: "The details matter", type: "Resene paint systems", url: "https://www.resene.co.nz/pdf/painters_general.pdf", image: "https://resenetechspecstoreprod.blob.core.windows.net/siteimages/094%20-%20stained%20old%20pine%20deck%20-%20A.jpg" }
+      ];
+      const cards = [...brochures, ...brochures].map((brochure, index) => {
+        const cloneAttributes = index >= brochures.length ? 'aria-hidden="true" tabindex="-1"' : "";
+        return `<button class="brochure-card" type="button" data-brochure-title="${brochure.title}" data-brochure-cover="${brochure.cover}" data-brochure-type="${brochure.type}" data-brochure-image="${brochure.image}" data-brochure-url="${brochure.url}" ${cloneAttributes} aria-label="Open ${brochure.title} brochure"><span class="brochure-cover"><img src="${brochure.image}" alt="" loading="lazy"><span class="brochure-brand">RESENE</span><span class="brochure-cover-title">${brochure.cover}</span><span class="brochure-cover-type">${brochure.type}</span></span><span class="brochure-card-footer"><span class="brochure-title">${brochure.title}</span><span class="brochure-card-qr" data-brochure-qr="${brochure.url}" aria-label="QR code for ${brochure.title}"></span></span></button>`;
+      }).join("");
+      studioTitle.textContent = "Digital brochures";
+      studioKicker.textContent = "Browse the Resene brochure collection";
+      studioContent.innerHTML = `<div class="brochure-carousel" aria-label="Brochure covers"><div class="brochure-track">${cards}</div></div><nav class="brochure-actionbar" aria-label="Brochure actions"><a href="https://techspec.resene.co.nz/" target="_blank" rel="noopener noreferrer">Full list of brochures</a><button type="button" data-close-studio>Close</button></nav>`;
+      studioContent.querySelectorAll("[data-brochure-qr]").forEach((container) => renderPaletteQr(container, container.dataset.brochureQr, 58));
+    }
+
+    function renderSignupView() {
+      studioTitle.textContent = "Sign up & save";
+      studioKicker.textContent = "Colour news and project inspiration";
+      studioContent.innerHTML = `<p class="studio-lede">Share your details and a Resene ColorShop team member can help you complete your signup.</p><form class="signup-form" id="signup-form"><label>First name<input name="firstName" autocomplete="given-name" required></label><label>Last name<input name="lastName" autocomplete="family-name" required></label><label>Email<input name="email" type="email" autocomplete="email" required></label><label>Mobile<input name="mobile" type="tel" autocomplete="tel"></label><label>Project type<select name="project"><option>Interior refresh</option><option>Exterior project</option><option>Deck or fence</option><option>Furniture or DIY</option><option>New build</option></select></label><label class="consent"><input name="consent" type="checkbox" required><span>I agree to receive Resene news and offers. I understand I can unsubscribe at any time.</span></label><div class="signup-actions"><button class="studio-button" type="submit">Submit signup request</button> <button class="studio-button" type="button" data-studio-home>Skip</button></div><p class="signup-status" id="signup-status" aria-live="polite">Your details are not sent or stored by this demo kiosk. Ask the ColorShop team to complete signup.</p></form>`;
+    }
+
+    function renderPromotionsView() {
+      const promotions = [
+        ["New products", "Ask the team to show you the latest Resene finishes.", "photo-1600210491369-e753d80a41f3"],
+        ["Seasonal projects", "Find a project to suit the season and your space.", "photo-1600607687920-4e2a09cf159d"],
+        ["Colour trends", "Explore expressive, nature-led palettes.", "photo-1600210492486-724fe5c67fb0"],
+        ["Featured inspiration", "See colour stories for rooms inside and out.", "photo-1600566753086-00f18fb6b3ea"],
+        ["Project ideas", "Get practical advice for your next decorating project.", "photo-1600607687939-ce8a6c25118c"],
+        ["In-store offers", "Ask your Resene ColorShop about current promotions.", "photo-1616486338812-3dadae4b4ace"]
+      ];
+      studioTitle.textContent = "Current promotions";
+      studioKicker.textContent = "Fresh ideas for your next project";
+      studioContent.innerHTML = `<p class="studio-lede">Explore current themes and ask your local Resene ColorShop about available offers.</p><div class="studio-resource-grid">${promotions.map(([name, description, image]) => `<article class="studio-resource-card"><img src="https://images.unsplash.com/${image}?auto=format&fit=crop&w=720&q=82" alt="${name}" loading="lazy"><div><h3>${name}</h3><p>${description}</p><a href="https://www.resene.co.nz/homeown/colour-inspiration/index.htm" target="_blank" rel="noopener noreferrer">Explore ideas ↗</a></div></article>`).join("")}</div>`;
+    }
+
+    function renderHelpView() {
+      studioTitle.textContent = "Here to help";
+      studioKicker.textContent = "Resene Colour Studio";
+      studioContent.innerHTML = `<p class="studio-lede">Choose a tile to explore a project, discover exact Resene colour pages, browse advice, or prepare a list for the ColorShop counter. Touch Home to return to the studio start. Colour shown on screen is indicative; check a physical swatch in your space.</p><div class="studio-link-row"><a href="https://www.resene.co.nz/" target="_blank" rel="noopener noreferrer">Visit Resene</a><a href="https://shop.resene.co.nz/paint" target="_blank" rel="noopener noreferrer">Shop paint</a><a href="https://shop.resene.co.nz/key-accessories" target="_blank" rel="noopener noreferrer">Shop accessories</a></div>`;
+    }
+
+    function openStudio(view) {
+      studioHistory.length = 0;
+      selectedColour = "";
+      selectedFamily = "";
+      selectedCollection = "";
+      renderStudioView(view);
+      studioPanel.showModal();
+    }
+
+    function navigateStudio(view) {
+      studioHistory.push(studioView);
+      renderStudioView(view);
+    }
+
+    function renderPaletteQr(container, payload, width = 174) {
+      container.replaceChildren();
+      try {
+        if (!window.QRCode) throw new Error("QR library unavailable");
+        new QRCode(container, { text: payload, width, height: width, colorDark: "#242b25", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M });
+      } catch {
+        container.textContent = "QR code unavailable. Use the direct link instead.";
+      }
+    }
+
+    studioContent.addEventListener("click", (event) => {
+      const brochureCard = event.target.closest("[data-brochure-url]");
+      if (brochureCard) {
+        brochureDetailTitle.textContent = brochureCard.dataset.brochureTitle;
+        brochureDetailImage.src = brochureCard.dataset.brochureImage;
+        brochureDetailImage.alt = brochureCard.dataset.brochureTitle;
+        brochureDetailCoverTitle.textContent = brochureCard.dataset.brochureCover;
+        brochureDetailType.textContent = brochureCard.dataset.brochureType;
+        renderPaletteQr(brochureDetailQr, brochureCard.dataset.brochureUrl, 256);
+        brochureDetail.showModal();
+        return;
+      }
+
+      if (event.target.closest("[data-close-studio]")) {
+        studioPanel.close();
+        return;
+      }
+
+      const familyButton = event.target.closest("[data-family-name]");
+      if (familyButton) {
+        selectedFamily = familyButton.dataset.familyName;
+        navigateStudio("family");
+        return;
+      }
+
+      const colourButton = event.target.closest("[data-colour-name]");
+      if (colourButton) {
+        selectedColour = colourButton.dataset.colourName;
+        navigateStudio("detail");
+        return;
+      }
+
+      const collectionButton = event.target.closest("[data-color-collection]");
+      if (collectionButton) {
+        if (collectionButton.dataset.colorCollection === "families") {
+          studioContent.querySelector(".family-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          selectedCollection = collectionButton.dataset.colorCollection;
+          navigateStudio("collection");
+        }
+        return;
+      }
+
+      const colourAction = event.target.closest("[data-colour-action]")?.dataset.colourAction;
+      if (colourAction === "rooms") {
+        studioContent.querySelector("#room-inspiration")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else if (colourAction === "build") {
+        selectedPalette = [selectedColour, ...colourDetails[selectedColour].complements];
+        studioContent.querySelector("#palette-status").textContent = `Palette built: ${selectedPalette.join(" · ")}`;
+      } else if (colourAction === "save") {
+        try {
+          localStorage.setItem("resene-colour-studio-palette", JSON.stringify(selectedPalette));
+          studioContent.querySelector("#palette-status").textContent = "Palette saved on this kiosk.";
+        } catch {
+          studioContent.querySelector("#palette-status").textContent = "Unable to save on this device. Use the QR code or email link instead.";
+        }
+      } else if (colourAction === "qr") {
+        const wrapper = studioContent.querySelector("#palette-qr-wrap");
+        wrapper.hidden = false;
+        const payload = selectedPalette.map((name) => `${name}\n${exactColourUrl(name)}`).join("\n\n");
+        renderPaletteQr(studioContent.querySelector("#palette-qr"), payload);
+      }
+
+      const productChoice = event.target.closest("[data-colour-products]");
+      if (productChoice) {
+        studioContent.querySelector("#palette-products").hidden = productChoice.dataset.colourProducts !== "yes";
+        return;
+      }
+
+      const resourceQrButton = event.target.closest("[data-resource-qr]");
+      if (resourceQrButton) {
+        const wrapper = studioContent.querySelector("#resource-qr-wrap");
+        wrapper.hidden = false;
+        renderPaletteQr(studioContent.querySelector("#resource-qr"), resourceQrButton.dataset.resourceQr, 150);
+        wrapper.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      if (event.target.closest("[data-print-resources]")) window.print();
+    });
+
+    studioContent.addEventListener("submit", (event) => {
+      if (event.target.id !== "signup-form") return;
+      event.preventDefault();
+      const firstName = new FormData(event.target).get("firstName");
+      studioContent.querySelector("#signup-status").textContent = `Thank you, ${firstName}. Please ask a ColorShop team member to complete your signup. This demo does not transmit or store personal details.`;
+      event.target.reset();
+    });
+
+    brochureDetail.addEventListener("click", (event) => {
+      if (event.target === brochureDetail) brochureDetail.close();
+    });
+
+    document.querySelectorAll("[data-close-brochure]").forEach((button) => {
+      button.addEventListener("click", () => brochureDetail.close());
+    });
+
+    function renderProjectStep() {
+      const question = projectQuestions[projectStep];
+      projectStepLabel.textContent = `Step ${projectStep + 1} of ${projectQuestions.length}`;
+      projectProgressFill.style.width = `${((projectStep + 1) / projectQuestions.length) * 100}%`;
+      projectWizardActions.hidden = false;
+      projectBack.hidden = projectStep === 0;
+      projectBack.disabled = projectStep === 0;
+      projectNext.disabled = !projectAnswers[question.key];
+      projectNext.textContent = projectStep === projectQuestions.length - 1 ? "See recommendations" : "Continue";
+      projectStepContent.innerHTML = `<h3 class="project-question">${question.title}</h3><div class="project-options" role="group" aria-label="${question.title}">${question.options.map((option) => `<button class="project-option" type="button" aria-pressed="${projectAnswers[question.key] === option}" data-project-choice="${escapeProjectText(option)}">${escapeProjectText(option)}</button>`).join("")}</div>`;
+
+      projectStepContent.querySelectorAll("[data-project-choice]").forEach((optionButton) => {
+        optionButton.addEventListener("click", () => {
+          projectAnswers[question.key] = optionButton.dataset.projectChoice;
+          renderProjectStep();
+          projectStepContent.querySelector(`[data-project-choice="${CSS.escape(projectAnswers[question.key])}"]`).focus();
+        });
+      });
+    }
+
+    function renderProjectRecommendations() {
+      const { project, surface, condition, finish } = projectAnswers;
+      const paintLink = "https://shop.resene.co.nz/paint";
+      const accessoryLink = "https://shop.resene.co.nz/key-accessories";
+      const prep = [{ name: "Resene Paint Prep and Housewash", purpose: "Wash away dirt and contaminants before coating; rinse and let the surface dry." }];
+      if (condition === "Mouldy") prep.push({ name: "Resene Moss & Mould Killer", purpose: "Treat mould and moss before washing and repainting; follow label directions." });
+      if (condition === "Peeling" || condition === "Flaking") {
+        prep.push({ name: "PAL Contract Series Filler", purpose: "Fill suitable small surface defects after removing loose coating; follow product directions." });
+        prep.push({ name: "Sanding Sponge", purpose: "Smooth filled areas and feather sound coating edges before priming." });
+      }
+
+      const primerBySurface = {
+        Timber: project === "Exterior House" || project === "Fence" || project === "Deck"
+          ? ["Resene Wood Primer", "Prime bare exterior timber before applying a compatible exterior topcoat."]
+          : ["Resene Quick Dry UnderCoat", "Prime suitable bare timber before topcoating; confirm suitability for the chosen location."],
+        Concrete: ["Resene Concrete Primer", "Prepare sound, suitably cured concrete before a compatible coating."],
+        Brick: ["Resene Concrete Primer", "Check the masonry is sound, dry and suitable for coating before priming."],
+        Plasterboard: ["Resene Broadwall Surface Prep & Seal", "Seal new plasterboard and prepared stopping before the finishing coats."],
+        Metal: ["Resene Galvo One", "Use on suitable galvanised or zinc-coated metal; choose a substrate-specific primer for other metals."],
+        "Previously Painted": condition === "Good"
+          ? ["No full primer coat", "If the existing coating is sound, clean and degloss it; spot-prime any exposed substrate with a compatible primer."]
+          : ["Resene Quick Dry UnderCoat", "Spot-prime exposed areas only where compatible with the existing coating and substrate."]
+      };
+      const [primerName, primerPurpose] = primerBySurface[surface];
+
+      const topcoatByProject = {
+        Walls: ["Resene SpaceCote Low Sheen", "Resene Zylone Sheen", "Resene SpaceCote Low Sheen Kitchen & Bathroom"],
+        Ceiling: ["Resene Ceiling Paint", "Resene SpaceCote Flat", "Resene SpaceCote Low Sheen"],
+        Deck: ["Resene Woodsman Cedar Natural Wood Oil", "Resene Non Skid Deck & Path", "Resene Woodsman Cedar Natural Wood Oil"],
+        Fence: ["Resene Lumbersider Low Sheen", "Resene Sonyx 101", "Resene Lumbersider Matt"],
+        "Exterior House": ["Resene Sonyx 101", "Resene Lumbersider Low Sheen", "Resene Sonyx 101"],
+        Roof: ["Resene Summit Roof", "Resene Summit Roof CoolColour", "Resene Summit Roof CoolColour"],
+        Furniture: ["Resene Lustacryl", "Resene Lustacryl Kitchen & Bathroom", "Resene Waterborne Lusta-Glo"],
+        Concrete: ["Resene Walk-On", "Resene Non Skid Deck & Path", "Resene Walk-On"],
+        Brick: ["Resene X-200", "Resene X-200", "Resene X-200"],
+        Metal: ["Resene Enamacryl", "Resene Lustacryl", "Resene Enamacryl"]
+      };
+      const [primary, alternative, premium] = topcoatByProject[project];
+      const finishNote = finish === "Natural Timber Finish"
+        ? "Natural finishes are generally limited to suitable timber and masonry systems; confirm compatibility for this project."
+        : `Requested finish: ${finish}. Confirm this sheen is available and suitable for the selected product and surface.`;
+      const paletteReason = project === "Exterior House" || project === "Fence" || project === "Roof"
+        ? "A grounded, timeless palette that sits comfortably with natural surroundings."
+        : "A balanced mix of deep green, soft neutral and warm stone for a calm, considered scheme.";
+
+      const prepCards = prep.map((item) => productCard("Preparation", item.name, item.purpose, item.name.includes("Scraper") ? accessoryLink : paintLink)).join("");
+      const accessoryNames = [
+        ["Roller Kit No. 1 Smooth Surfaces 230mm", "Apply paint evenly across broad, smooth surfaces."],
+        ["PAL Legend Angle Paint Brush 50mm", "Cut in neatly around edges and trim."],
+        ["Roller Tray Plastic 230mm PAL", "Load and distribute paint on the roller."],
+        ["Masking Tape Sellotape Washi Advance", "Protect adjacent surfaces and create clean lines."],
+        ["Resene DIY Starter Kit 8pc", "A convenient selection of common decorating tools."],
+        ["Sanding Sponge", "Smooth sound edges and prepare glossy areas." ]
+      ];
+
+      projectStepLabel.textContent = "Your project recommendations";
+      projectProgressFill.style.width = "100%";
+      projectWizardActions.hidden = true;
+      projectStepContent.innerHTML = `
+        <div class="project-results">
+          <section class="project-summary" aria-labelledby="summary-title">
+            <div class="project-section-heading"><span class="project-index">01</span><h3 id="summary-title">Project summary</h3></div>
+            <div class="summary-grid">
+              <div class="summary-item"><span>Project</span><strong>${escapeProjectText(project)}</strong></div>
+              <div class="summary-item"><span>Surface</span><strong>${escapeProjectText(surface)}</strong></div>
+              <div class="summary-item"><span>Condition</span><strong>${escapeProjectText(condition)}</strong></div>
+              <div class="summary-item"><span>Finish</span><strong>${escapeProjectText(finish)}</strong></div>
+            </div>
+          </section>
+          <section aria-labelledby="prep-title"><div class="project-section-heading"><span class="project-index">02</span><h3 id="prep-title">Surface preparation</h3></div><div class="recommendation-grid">${prepCards}</div></section>
+          <section aria-labelledby="primer-title"><div class="project-section-heading"><span class="project-index">03</span><h3 id="primer-title">Primer</h3></div><div class="recommendation-grid">${productCard("Recommended primer", primerName, primerPurpose, paintLink, "Coverage: see the current product data sheet.")}</div></section>
+          <section aria-labelledby="topcoat-title"><div class="project-section-heading"><span class="project-index">04</span><h3 id="topcoat-title">Recommended topcoats</h3></div><div class="recommendation-grid">
+            ${productCard("Primary choice", primary, finishNote, paintLink, "Coverage: see the current product data sheet.")}
+            ${productCard("Alternative", alternative, "Consider this option when its product specifications suit your substrate and location.", paintLink)}
+            ${productCard("Premium option", premium, "Ask in store to confirm the best system for your project and desired finish.", paintLink)}
+          </div><div class="paint-estimate-cta"><p>Estimate the quantity of <strong>${escapeProjectText(primary)}</strong> for your project. The estimate will be added to your QR list.</p><button type="button" data-open-recommended-calculator data-product="${escapeProjectText(primary)}">Calculate paint quantity</button></div></section>
+          <section aria-labelledby="colour-title"><div class="project-section-heading"><span class="project-index">05</span><h3 id="colour-title">Colour recommendations</h3></div><div class="recommendation-grid">
+            ${productCard("Featured colour", "Thunderstorm", paletteReason, "https://www.resene.co.nz/swatches/")}
+            ${productCard("Complementary colours", "Baring Head · White Pointer · Stepping Stone", "Explore the swatches together in store and view them in your project’s light.", "https://www.resene.co.nz/swatches/")}
+          </div></section>
+          <section aria-labelledby="accessory-title"><div class="project-section-heading"><span class="project-index">06</span><h3 id="accessory-title">Accessories required</h3></div><div class="recommendation-grid">${accessoryNames.map(([name, purpose]) => productCard("Accessory", name, purpose, accessoryLink)).join("")}</div></section>
+          <section aria-labelledby="resource-title"><div class="project-section-heading"><span class="project-index">07</span><h3 id="resource-title">Keep exploring</h3></div><div class="project-resource-links">
+            <a href="https://www.resene.co.nz/videos.htm" target="_blank" rel="noopener noreferrer">How-to videos</a>
+            <a href="https://www.resene.co.nz/homeown/colour-inspiration/index.htm" target="_blank" rel="noopener noreferrer">Colour inspiration</a>
+            <a href="https://www.masterstrokebyresene.com/" target="_blank" rel="noopener noreferrer">Masterstroke by Resene</a>
+            <a href="https://www.resene.co.nz/homeown/decorating_inspirations/the-home-guide/index.htm" target="_blank" rel="noopener noreferrer">Brochures and home guide</a>
+            <a href="${paintLink}" target="_blank" rel="noopener noreferrer">Shop Resene paint</a>
+          </div></section>
+          <section class="takeaway-section" id="takeaway-print" aria-labelledby="takeaway-title">
+            <div class="project-section-heading"><span class="project-index">08</span><h3 id="takeaway-title">Take your list to the counter</h3></div>
+            <div class="takeaway-layout">
+              <div class="takeaway-qr" id="takeaway-qr" role="img" aria-label="QR code for this project recommendation list"></div>
+              <div class="takeaway-copy"><p>Scan this code for your project summary, recommended products and direct shop links. Or print a clear product list to bring to the counter.</p><a class="takeaway-email" id="email-counter-list" href="mailto:?subject=Resene%20project%20recommendations">Email results</a><button type="button" id="print-counter-list">Print product list</button></div>
+            </div>
+            <ol class="takeaway-list" id="takeaway-list"></ol>
+          </section>
+          <p class="project-disclaimer">Recommendations are a starting point, not a substitute for checking the current product label and technical data sheet. Substrate, existing coatings, preparation, exposure and application conditions can affect product suitability and coverage. Ask a Resene team member to confirm the complete system.</p>
+        </div>`;
+      const takeawayItems = [
+        ...prep.map((item) => ({ name: item.name, link: item.name.includes("Scraper") ? accessoryLink : paintLink })),
+        { name: primerName, link: paintLink },
+        { name: primary, link: paintLink },
+        { name: alternative, link: paintLink },
+        { name: premium, link: paintLink },
+        ...accessoryNames.map(([name]) => ({ name, link: accessoryLink }))
+      ];
+      currentProjectSummary = { project, surface, condition, finish };
+      currentProjectItems = takeawayItems;
+      activeRecommendedProduct = "";
+      latestPaintEstimate = "";
+      renderTakeawayList(currentProjectSummary, currentProjectItems);
+    }
+
+    const shopProductCatalog = {
+      "Resene Paint Prep and Housewash": { url: "https://shop.resene.co.nz/resene-paint-prep-housewash", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/r/e/resene-paint-prep-and-housewash-rgb.png" },
+      "Resene Moss & Mould Killer": { url: "https://shop.resene.co.nz/resene-moss-mould-killer", image: "https://shop.resene.co.nz/media/catalog/product/cache/7800bb778a954cb4c97ef3c76a1a4610/r/e/resene-moss_mould-killer-rgb_1_.png" },
+      "Resene Wood Primer": { url: "https://shop.resene.co.nz/resene-wood-primer", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/r/e/resene-aluminium-wood-primer-rgb.png" },
+      "Resene Quick Dry UnderCoat": { url: "https://shop.resene.co.nz/quick-dry-undercoat", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/361203_resene_quick_dry_4l_9418022005360.jpg" },
+      "Resene Concrete Primer": { url: "https://shop.resene.co.nz/resene-concrete-primer", image: "https://shop.resene.co.nz/media/catalog/product/cache/7800bb778a954cb4c97ef3c76a1a4610/r/e/resene-concrete-primer-rgb.png" },
+      "Resene Broadwall Surface Prep & Seal": { url: "https://shop.resene.co.nz/broadwall-surface-prep-seal", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/361221_resene_broadwall_surface_prep_seal_4l_9418022026242.jpg" },
+      "Resene Galvo One": { url: "https://shop.resene.co.nz/resene-galvo-one", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/361220_resene_galvo_one_4l_9418022005544.jpg" },
+      "Resene Zylone Sheen": { url: "https://shop.resene.co.nz/zylone-sheen", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/5/356537_resene_zylone_sheen_white_4l_9418022001119.jpg" },
+      "Resene SpaceCote Low Sheen": { url: "https://shop.resene.co.nz/spacecote-low-sheen", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/2/7/278842_resene_spacecote_low_sheen_intense_red_4l_9418022061205.jpg" },
+      "Resene SpaceCote Low Sheen Kitchen & Bathroom": { url: "https://shop.resene.co.nz/spacecote-kitchen-bathroom", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/5/356578_resene_spacecote_low_sheen_kitchen_bathroom_white_4l_9418022029113.jpg" },
+      "Resene SpaceCote Flat": { url: "https://shop.resene.co.nz/spacecote-flat", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/5/356560_resene_spacecote_flat_white_4l_9418022028765.jpg" },
+      "Resene Ceiling Paint": { url: "https://shop.resene.co.nz/ceiling-paint", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/5/355091_resene_ceiling_white_4l_9418022001195.jpg" },
+      "Resene Woodsman Cedar Natural Wood Oil": { url: "https://shop.resene.co.nz/resene-woodsman-cedar-natural-wood-oil", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/2/0/2026746_resene_woodsman_cedar_natural_wood_oil_4l_9418022101697.jpg" },
+      "Resene Non Skid Deck & Path": { url: "https://shop.resene.co.nz/resene-non-skid-deck-path-1", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/361181_resene_non-skid_deck_path_white_4l_9418022026532_1.jpg" },
+      "Resene Lumbersider Low Sheen": { url: "https://shop.resene.co.nz/resene-lumbersider", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/361148_resene_lumbersider_low_sheen_white_4l_941802201386.jpg" },
+      "Resene Lumbersider Matt": { url: "https://shop.resene.co.nz/resene-lumbersider-matt-1", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/2/0/2011860_resene_lumbersider_matt_white_4l_9418022100744.jpg" },
+      "Resene Sonyx 101": { url: "https://shop.resene.co.nz/resene-sonyx-101", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/361092_resene_sonyx_101_white_4l_9418022000099.jpg" },
+      "Resene Summit Roof": { url: "https://shop.resene.co.nz/resene-summit-roof", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/r/e/resene_summit_roof.jpg" },
+      "Resene Summit Roof CoolColour": { url: "https://shop.resene.co.nz/resene-summit-roof-cool-colour", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/r/e/resene_summit_roof_cool_colour.jpg" },
+      "Resene Lustacryl": { url: "https://shop.resene.co.nz/lustacryl", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/5/356601_resene_lustacryl_white_4l_9418022001850.jpg" },
+      "Resene Enamacryl": { url: "https://shop.resene.co.nz/enamacryl", image: "https://shop.resene.co.nz/media/catalog/product/cache/7800bb778a954cb4c97ef3c76a1a4610/r/e/resene-enamacryl-png.png" },
+      "Resene Lustacryl Kitchen & Bathroom": { url: "https://shop.resene.co.nz/lustacryl-kitchen-bathroom", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/1/2/123390_resene_lustacryl_kitchen_bathroom_white_4l_9418022033714.jpg" },
+      "Resene Waterborne Lusta-Glo": { url: "https://shop.resene.co.nz/resene-waterbourne-lusta-glo-1", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/3/6/369997_resene_waterborne_lusta-glo_white_4l_9418022088646.jpg" },
+      "Resene Walk-On": { url: "https://shop.resene.co.nz/resene-walk-on-1", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/2/3/239339_resene_walk-on_mid_3.92l_9418022060499.jpg" },
+      "Resene X-200": { url: "https://shop.resene.co.nz/resene-x-200", image: "https://shop.resene.co.nz/media/catalog/product/cache/7800bb778a954cb4c97ef3c76a1a4610/r/e/resene-x-200-rgb.png" },
+      "PAL Legend Angle Paint Brush 50mm": { url: "https://shop.resene.co.nz/pal-legend-angle-brush", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/1/0/107016_pal_legend_cutting_in_brush_50mm_1.jpg" },
+      "Roller Kit No. 1 Smooth Surfaces 230mm": { url: "https://shop.resene.co.nz/roller-kit-1-smooth-surfaces-230mm", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/9/1/9142800.jpg" },
+      "Roller Tray Plastic 230mm PAL": { url: "https://shop.resene.co.nz/roller-tray-plastic-230mm-pal", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/9/1/9122000.jpg" },
+      "Masking Tape Sellotape Washi Advance": { url: "https://shop.resene.co.nz/washi-advance-masking-tape", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/9/0/9000032.jpg" },
+      "Resene DIY Starter Kit 8pc": { url: "https://shop.resene.co.nz/resene-8pc-diy-starter-kit", image: "https://shop.resene.co.nz/media/catalog/product/cache/3c32903e06509e68601f680f849bcc7d/9/1/9142000.jpg" }
+    };
+
+    function productCard(title, product, purpose, link, coverage = "") {
+      const productInfo = shopProductCatalog[product];
+      const productLink = productInfo?.url || link;
+      const photo = productInfo?.image
+        ? `<a class="product-photo-link" href="${productLink}" target="_blank" rel="noopener noreferrer"><img class="product-photo" src="${productInfo.image}" alt="${product}" loading="lazy"></a>`
+        : "";
+      const linkLabel = productInfo ? "View this product" : "Browse Resene products";
+      return `<article class="recommendation-card">${photo}<h4>${title}</h4><strong>${product}</strong><p>${purpose}</p>${coverage ? `<p>${coverage}</p>` : ""}<a href="${productLink}" target="_blank" rel="noopener noreferrer">${linkLabel}</a></article>`;
+    }
+
+    projectStepContent.addEventListener("error", (event) => {
+      if (event.target.matches(".product-photo")) event.target.closest(".product-photo-link").remove();
+    }, true);
+
+    function renderTakeawayList(answers, items) {
+      const qrContainer = document.querySelector("#takeaway-qr");
+      const list = document.querySelector("#takeaway-list");
+      const productLines = items.map(({ name, link }) => {
+        const url = shopProductCatalog[name]?.url || link;
+        return `${name}\n${url}`;
+      });
+      const payload = [
+        "RESENE DIY PROJECT RECOMMENDATIONS",
+        `Project: ${answers.project}`,
+        `Surface: ${answers.surface}`,
+        `Condition: ${answers.condition}`,
+        `Finish: ${answers.finish}`,
+        "PRODUCT LIST:",
+        ...productLines,
+        ...(activeRecommendedProduct && latestPaintEstimate
+          ? ["PAINT ESTIMATE:", `${latestPaintEstimate} of ${activeRecommendedProduct}`, shopProductCatalog[activeRecommendedProduct]?.url || "https://shop.resene.co.nz/paint"]
+          : [])
+      ].join("\n");
+
+      qrContainer.replaceChildren();
+      try {
+        if (!window.QRCode) throw new Error("QR library unavailable");
+        new QRCode(qrContainer, {
+          text: payload,
+          width: 174,
+          height: 174,
+          colorDark: "#242b25",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      } catch {
+        qrContainer.textContent = "QR code unavailable. Print the product list instead.";
+      }
+
+      const estimateLine = activeRecommendedProduct && latestPaintEstimate
+        ? `<li><strong>Estimated quantity: ${latestPaintEstimate} of ${escapeProjectText(activeRecommendedProduct)}</strong><a href="${shopProductCatalog[activeRecommendedProduct]?.url || "https://shop.resene.co.nz/paint"}">${shopProductCatalog[activeRecommendedProduct]?.url || "https://shop.resene.co.nz/paint"}</a></li>`
+        : "";
+      list.innerHTML = `${estimateLine}${items.map(({ name, link }) => {
+        const url = shopProductCatalog[name]?.url || link;
+        return `<li><strong>${escapeProjectText(name)}</strong><a href="${url}">${url}</a></li>`;
+      }).join("")}`;
+      const emailBody = [
+        `Project: ${answers.project}`,
+        `Surface: ${answers.surface}`,
+        `Condition: ${answers.condition}`,
+        `Finish: ${answers.finish}`,
+        ...productLines,
+        ...(activeRecommendedProduct && latestPaintEstimate ? [`Estimated quantity: ${latestPaintEstimate} of ${activeRecommendedProduct}`] : [])
+      ].join("\n");
+      document.querySelector("#email-counter-list").href = `mailto:?subject=${encodeURIComponent(`Resene project: ${answers.project}`)}&body=${encodeURIComponent(emailBody)}`;
+    }
+
+    projectNext.addEventListener("click", () => {
+      if (!projectAnswers[projectQuestions[projectStep].key]) return;
+      if (projectStep === projectQuestions.length - 1) {
+        renderProjectRecommendations();
+      } else {
+        projectStep += 1;
+        renderProjectStep();
+      }
+    });
+
+    projectBack.addEventListener("click", () => {
+      if (projectStep > 0) {
+        projectStep -= 1;
+        renderProjectStep();
+      }
+    });
+
+    document.querySelectorAll("[data-close-projects]").forEach((button) => {
+      button.addEventListener("click", () => projectAssistant.close());
+    });
+
+    projectAssistant.addEventListener("click", (event) => {
+      if (event.target === projectAssistant) projectAssistant.close();
+    });
+
+    projectAssistant.addEventListener("close", () => {
+      projectStep = 0;
+      projectAnswers = {};
+    });
+
+    projectStepContent.addEventListener("click", (event) => {
+      const calculatorButton = event.target.closest("[data-open-recommended-calculator]");
+      if (calculatorButton) {
+        activeRecommendedProduct = calculatorButton.dataset.product;
+        calculatorProductName.textContent = `Recommended paint: ${activeRecommendedProduct}`;
+        calculatorProductName.hidden = false;
+        updatePaintEstimate();
+        calculator.showModal();
+        return;
+      }
+      if (event.target.closest("#print-counter-list")) window.print();
+    });
+
+    document.querySelectorAll("[data-open-projects]").forEach((button) => {
+      button.addEventListener("click", () => {
+        projectStep = 0;
+        projectAnswers = {};
+        renderProjectStep();
+        projectAssistant.showModal();
+      });
+    });
+
+    document.querySelectorAll("[data-open-studio]").forEach((button) => {
+      button.addEventListener("click", () => openStudio(button.dataset.studioView));
+    });
+
+    document.querySelectorAll("[data-close-studio]").forEach((button) => {
+      button.addEventListener("click", () => studioPanel.close());
+    });
+
+    function closeKioskPanels() {
+      [studioPanel, projectAssistant, calculator].forEach((panel) => {
+        if (panel.open) panel.close();
+      });
+    }
+
+    function goHome() {
+      closeKioskPanels();
+      studioHistory.length = 0;
+      projectStep = 0;
+      projectAnswers = {};
+      currentProjectSummary = null;
+      currentProjectItems = [];
+      activeRecommendedProduct = "";
+      latestPaintEstimate = "";
+      screen.classList.remove("started", "attract");
+    }
+
+    function startAgain() {
+      goHome();
+      calculatorForm.reset();
+      currentProjectSummary = null;
+      currentProjectItems = [];
+      activeRecommendedProduct = "";
+      latestPaintEstimate = "";
+      calculatorProductName.hidden = true;
+      scheduleKioskTimeout();
+    }
+
+    function goBack() {
+      if (studioPanel.open) {
+        if (studioHistory.length) renderStudioView(studioHistory.pop());
+        else studioPanel.close();
+      } else if (projectAssistant.open) {
+        if (projectStep > 0) projectBack.click();
+        else projectAssistant.close();
+      } else if (calculator.open) {
+        calculator.close();
+      }
+    }
+
+    function openHelp() {
+      if (studioPanel.open) studioHistory.push(studioView);
+      else closeKioskPanels();
+      renderStudioView("help");
+      if (!studioPanel.open) studioPanel.showModal();
+    }
+
+    document.addEventListener("click", (event) => {
+      if (event.target.closest("[data-studio-home]")) goHome();
+      else if (event.target.closest("[data-kiosk-back]")) goBack();
+      else if (event.target.closest("[data-kiosk-help]")) openHelp();
+      else if (event.target.closest("[data-start-again]")) startAgain();
+    });
+
+    function returnToHomeAfterIdle() {
+      closeKioskPanels();
+      studioHistory.length = 0;
+      projectStep = 0;
+      projectAnswers = {};
+      currentProjectSummary = null;
+      currentProjectItems = [];
+      activeRecommendedProduct = "";
+      latestPaintEstimate = "";
+      screen.classList.remove("started", "attract");
+      inactivityTimer = window.setTimeout(() => screen.classList.add("attract"), 60000);
+    }
+
+    function scheduleKioskTimeout() {
+      window.clearTimeout(inactivityTimer);
+      screen.classList.remove("attract");
+      inactivityTimer = window.setTimeout(returnToHomeAfterIdle, 60000);
+    }
+
+    document.addEventListener("pointerdown", scheduleKioskTimeout, true);
+    document.addEventListener("keydown", scheduleKioskTimeout, true);
+
+    function updatePaintEstimate() {
+      const values = new FormData(calculatorForm);
+      const length = Number(values.get("length"));
+      const width = Number(values.get("width"));
+      const height = Number(values.get("height"));
+      const openings = Number(values.get("openings")) || 0;
+      const coats = Number(values.get("coats"));
+      const coverage = Number(values.get("coverage"));
+      const wallArea = Math.max(0, 2 * (length + width) * height - openings);
+      const ceilingArea = length * width;
+      const surface = values.get("surface");
+      const area = surface === "ceiling" ? ceilingArea : surface === "walls-ceiling" ? wallArea + ceilingArea : wallArea;
+
+      if (!calculatorForm.checkValidity() || coverage <= 0) {
+        paintEstimate.value = "Enter dimensions";
+        latestPaintEstimate = "";
+        if (currentProjectSummary && currentProjectItems.length) renderTakeawayList(currentProjectSummary, currentProjectItems);
+        return;
+      }
+
+      const litres = Math.ceil((area * coats / coverage) * 10) / 10;
+      paintEstimate.value = `${litres.toFixed(1)} L`;
+      latestPaintEstimate = activeRecommendedProduct ? paintEstimate.value : "";
+      if (currentProjectSummary && currentProjectItems.length) renderTakeawayList(currentProjectSummary, currentProjectItems);
+    }
+
+    updatePaintEstimate();
+
+    document.querySelector("[data-open-calculator]").addEventListener("click", () => {
+      activeRecommendedProduct = "";
+      latestPaintEstimate = "";
+      calculatorProductName.hidden = true;
+      updatePaintEstimate();
+      calculator.showModal();
+    });
+
+    document.querySelectorAll("[data-close-calculator]").forEach((button) => {
+      button.addEventListener("click", () => calculator.close());
+    });
+
+    calculator.addEventListener("click", (event) => {
+      if (event.target === calculator) calculator.close();
+    });
+
+    calculatorForm.addEventListener("input", updatePaintEstimate);
+    calculatorForm.addEventListener("change", updatePaintEstimate);
+
+    begin.addEventListener("click", () => {
+      screen.classList.remove("attract");
+      screen.classList.add("started");
+      begin.querySelector("span:last-child").textContent = "Let’s find your colour";
+    });
+
+    screen.addEventListener("click", (event) => {
+      if (projectAssistant.open || calculator.open || studioPanel.open) return;
+      if (event.target.closest("button")) return;
+      screen.classList.remove("attract");
+      screen.classList.add("started");
+      begin.querySelector("span:last-child").textContent = "Let’s find your colour";
+    });
+
+    document.querySelectorAll("[data-action]:not([data-action='begin'])").forEach((item) => {
+      item.addEventListener("click", () => {
+        if (item.hasAttribute("data-open-projects")) return;
+        begin.querySelector("span:last-child").textContent = `Explore ${item.dataset.action}`;
+        begin.focus({ preventScroll: true });
+      });
+    });
+
+    scheduleKioskTimeout();
+  </script>
+</body>
+</html>
